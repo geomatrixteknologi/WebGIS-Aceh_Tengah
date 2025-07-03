@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.triangle-cluster-wrapper {
+  background: none !important;
+  border: none !important;
+}
+
+.triangle-cluster {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 35px solid #3b82f6; /* biru tailwind */
+  position: relative;
+}
+
+.cluster-count {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
