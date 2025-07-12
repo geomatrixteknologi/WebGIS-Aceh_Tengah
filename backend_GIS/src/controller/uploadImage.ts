@@ -5,7 +5,7 @@ import multer from "multer";
 import cloudinary from "../utils/cloudinary";
 import streamifier from "streamifier";
 import { HeadObjectCommand, ListObjectsV2Command, PutObjectCommand } from "@aws-sdk/client-s3";
-import s3 from "@/utils/s3";
+import s3 from "../utils/s3";
 
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -247,7 +247,7 @@ export const PostFotoPersil = async (req: Request, res: Response) => {
       filename = `${forceName}.${extension}`;
     } else {
       // ⬇ Hitung jumlah foto dengan prefix `fotopersil/NOP_`
-      const prefix = `fotopersil/${nop}_`;
+      const prefix = `fotopersil_aceh-tengah/${nop}_`;
       const listCommand = new ListObjectsV2Command({
         Bucket: bucketName,
         Prefix: prefix,
@@ -263,7 +263,7 @@ export const PostFotoPersil = async (req: Request, res: Response) => {
       filename = `${nop}_${photoNumber}.${extension}`;
     }
 
-    const key = `fotopersil/${filename}`;
+    const key = `fotopersil_aceh-tengah/${filename}`;
 
     // ⬇ Cek apakah file sudah ada, hanya kalau **tidak forceName**
     if (!forceName) {

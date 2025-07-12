@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../data-resource";
-import { BatasPersil } from "@/entity/batasPersil";
 import { HeadObjectCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
-import s3 from "@/utils/s3";
+import s3 from "../utils/s3";
 
 // export const GetFotoPersil = async (req: Request, res: Response) => {
 //   try {
@@ -39,7 +38,7 @@ import s3 from "@/utils/s3";
 export const checkfotopersil = async (req: Request, res: Response) => {
   const { filename } = req.params;
   const bucket = process.env.AWS_S3_BUCKET_NAME;
-  const prefix = `fotopersil/${filename}`; // tanpa ekstensi
+  const prefix = `fotopersil_aceh-tengah/${filename}`; // tanpa ekstensi
 
   try {
     const listCommand = new ListObjectsV2Command({
@@ -50,7 +49,7 @@ export const checkfotopersil = async (req: Request, res: Response) => {
 
     const result = await s3.send(listCommand);
 
-    const match = result.Contents?.find((obj) => obj.Key?.match(new RegExp(`^fotopersil/${filename}\\.(jpg|jpeg|png|webp|bmp|gif)$`, "i")));
+    const match = result.Contents?.find((obj) => obj.Key?.match(new RegExp(`^fotopersil_aceh-tengah/${filename}\\.(jpg|jpeg|png|webp|bmp|gif)$`, "i")));
 
     if (!match) {
       return res.status(200).json({ exists: false });
@@ -76,7 +75,7 @@ export const GetFotoPersil = async (req: Request, res: Response) => {
     }
 
     const bucketName = process.env.AWS_S3_BUCKET_NAME!;
-    const prefix = `fotopersil/${nop}_`;
+    const prefix = `fotopersil_aceh-tengah/${nop}_`;
 
     const command = new ListObjectsV2Command({
       Bucket: bucketName,

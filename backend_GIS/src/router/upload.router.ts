@@ -1,6 +1,6 @@
-import { PostFotoPersil, uploadFotoMiddleware } from "@/controller/uploadImage";
-import { PostShpBlok, PostShpKelurahan, PostShpPersil, PostShpZNT } from "@/controller/uploadshp";
-import { uploadMiddleware } from "@/middleware/uploadMiddleware";
+import { PostFotoPersil, uploadFotoMiddleware } from "../controller/uploadImage";
+import { PostShpBlok, PostShpKelurahan, PostShpPersil, PostShpZNT } from "../controller/uploadshp";
+import { uploadMiddleware } from "../middleware/uploadMiddleware";
 import { Router } from "express";
 
 const uploadRouter = Router();

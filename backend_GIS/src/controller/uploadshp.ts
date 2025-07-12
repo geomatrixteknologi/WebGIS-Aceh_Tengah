@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import { open } from "shapefile";
 import proj4 from "proj4";
-import { AppDataSource } from "@/data-resource";
-import { BatasKelurahan } from "@/entity/batasKelurahan";
-import { BatasPersil } from "@/entity/batasPersil";
+import { AppDataSource } from "../data-resource";
+import { BatasKelurahan } from "../entity/batasKelurahan";
+import { BatasPersil } from "../entity/batasPersil";
 import path from "path";
-import { BatasZNT } from "@/entity/batasZNT";
-import { BatasBlok } from "@/entity/batasBlok";
+import { BatasZNT } from "../entity/batasZNT";
+import { BatasBlok } from "../entity/batasBlok";
 
-// Definisi proyeksi UTM Zona 50S (EPSG:32750) dan WGS84 (EPSG:4326)
-const utm50s = "+proj=utm +zone=50 +south +datum=WGS84 +units=m +no_defs";
+// Definisi proyeksi UTM Zona 47N (EPSG:32750) dan WGS84 (EPSG:4326)
+const utm47s = "+proj=utm +zone=47 +datum=WGS84 +units=m +no_defs";
 const wgs84 = "+proj=longlat +datum=WGS84 +no_defs";
 
 export const PostShpKelurahan = async (req: Request, res: Response) => {
@@ -24,8 +24,8 @@ export const PostShpKelurahan = async (req: Request, res: Response) => {
 
     // pastikan KD_PROV dan KD_KAB sesuai dengan project yang dijalankan
     const refData: Record<string, string> = {
-      KD_PROV: "62",
-      KD_KAB: "13",
+      KD_PROV: "11",
+      KD_KAB: "04",
       KD_KEC: kecamatanNew,
     };
 
@@ -63,13 +63,13 @@ export const PostShpKelurahan = async (req: Request, res: Response) => {
         let convertedCoordinates;
         switch (geometry.type) {
           case "Point":
-            convertedCoordinates = proj4(utm50s, wgs84, geometry.coordinates);
+            convertedCoordinates = proj4(utm47s, wgs84, geometry.coordinates);
             break;
           case "Polygon":
-            convertedCoordinates = geometry.coordinates.map((ring: any) => ring.map((point: any) => proj4(utm50s, wgs84, point)));
+            convertedCoordinates = geometry.coordinates.map((ring: any) => ring.map((point: any) => proj4(utm47s, wgs84, point)));
             break;
           case "MultiPolygon":
-            convertedCoordinates = geometry.coordinates.map((polygon: any) => polygon.map((ring: any) => ring.map((point: any) => proj4(utm50s, wgs84, point))));
+            convertedCoordinates = geometry.coordinates.map((polygon: any) => polygon.map((ring: any) => ring.map((point: any) => proj4(utm47s, wgs84, point))));
             break;
           default:
             console.warn(`Geometry type ${geometry.type} is not supported`);
@@ -171,8 +171,8 @@ export const PostShpPersil = async (req: Request, res: Response) => {
 
     // pastikan KD_PROV dan KD_KAB sesuai dengan project yang dijalankan
     const refData: Record<string, string> = {
-      KD_PROV: "62",
-      KD_KAB: "13",
+      KD_PROV: "11",
+      KD_KAB: "04",
       KD_KEC: kecamatanNew,
       KD_KEL: kelurahanNew,
     };
@@ -228,13 +228,13 @@ export const PostShpPersil = async (req: Request, res: Response) => {
         let convertedCoordinates;
         switch (geometry.type) {
           case "Point":
-            convertedCoordinates = proj4(utm50s, wgs84, geometry.coordinates);
+            convertedCoordinates = proj4(utm47s, wgs84, geometry.coordinates);
             break;
           case "Polygon":
-            convertedCoordinates = geometry.coordinates.map((ring: any) => ring.map((point: any) => proj4(utm50s, wgs84, point)));
+            convertedCoordinates = geometry.coordinates.map((ring: any) => ring.map((point: any) => proj4(utm47s, wgs84, point)));
             break;
           case "MultiPolygon":
-            convertedCoordinates = geometry.coordinates.map((polygon: any) => polygon.map((ring: any) => ring.map((point: any) => proj4(utm50s, wgs84, point))));
+            convertedCoordinates = geometry.coordinates.map((polygon: any) => polygon.map((ring: any) => ring.map((point: any) => proj4(utm47s, wgs84, point))));
             break;
           default:
             console.warn(`Geometry type ${geometry.type} is not supported`);
@@ -324,8 +324,8 @@ export const PostShpZNT = async (req: Request, res: Response) => {
 
     // pastikan KD_PROV dan KD_KAB sesuai dengan project yang dijalankan
     const refData: Record<string, string> = {
-      KD_PROV: "62",
-      KD_KAB: "13",
+      KD_PROV: "11",
+      KD_KAB: "04",
       KD_KEC: kecamatanNew,
       KD_KEL: kelurahanNew,
     };
@@ -371,13 +371,13 @@ export const PostShpZNT = async (req: Request, res: Response) => {
         let convertedCoordinates;
         switch (geometry.type) {
           case "Point":
-            convertedCoordinates = proj4(utm50s, wgs84, geometry.coordinates);
+            convertedCoordinates = proj4(utm47s, wgs84, geometry.coordinates);
             break;
           case "Polygon":
-            convertedCoordinates = geometry.coordinates.map((ring: any) => ring.map((point: any) => proj4(utm50s, wgs84, point)));
+            convertedCoordinates = geometry.coordinates.map((ring: any) => ring.map((point: any) => proj4(utm47s, wgs84, point)));
             break;
           case "MultiPolygon":
-            convertedCoordinates = geometry.coordinates.map((polygon: any) => polygon.map((ring: any) => ring.map((point: any) => proj4(utm50s, wgs84, point))));
+            convertedCoordinates = geometry.coordinates.map((polygon: any) => polygon.map((ring: any) => ring.map((point: any) => proj4(utm47s, wgs84, point))));
             break;
           default:
             console.warn(`Geometry type ${geometry.type} is not supported`);
@@ -496,8 +496,8 @@ export const PostShpBlok = async (req: Request, res: Response) => {
 
     // pastikan KD_PROV dan KD_KAB sesuai dengan project yang dijalankan
     const refData: Record<string, string> = {
-      KD_PROV: "62",
-      KD_KAB: "13",
+      KD_PROV: "11",
+      KD_KAB: "04",
       KD_KEC: kecamatanNew,
       KD_KEL: kelurahanNew,
     };
@@ -536,13 +536,13 @@ export const PostShpBlok = async (req: Request, res: Response) => {
         let convertedCoordinates;
         switch (geometry.type) {
           case "Point":
-            convertedCoordinates = proj4(utm50s, wgs84, geometry.coordinates);
+            convertedCoordinates = proj4(utm47s, wgs84, geometry.coordinates);
             break;
           case "Polygon":
-            convertedCoordinates = geometry.coordinates.map((ring: any) => ring.map((point: any) => proj4(utm50s, wgs84, point)));
+            convertedCoordinates = geometry.coordinates.map((ring: any) => ring.map((point: any) => proj4(utm47s, wgs84, point)));
             break;
           case "MultiPolygon":
-            convertedCoordinates = geometry.coordinates.map((polygon: any) => polygon.map((ring: any) => ring.map((point: any) => proj4(utm50s, wgs84, point))));
+            convertedCoordinates = geometry.coordinates.map((polygon: any) => polygon.map((ring: any) => ring.map((point: any) => proj4(utm47s, wgs84, point))));
             break;
           default:
             console.warn(`Geometry type ${geometry.type} is not supported`);
