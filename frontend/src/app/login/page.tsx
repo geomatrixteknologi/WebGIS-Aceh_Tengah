@@ -64,7 +64,7 @@ export default function LoginPage() {
 
         {/* Gambar Logo */}
         <Box>
-          <Image src="/geomatrix.jpg" alt="geomatrix" width={400} height={400} />
+          <Image src="/aceh_tengah.png" alt="geomatrix" width={500} height={500} />
         </Box>
       </Box>
     </Box>
