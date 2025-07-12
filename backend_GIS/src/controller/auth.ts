@@ -76,8 +76,8 @@ export const login = async (req: Request, res: Response) => {
 
     // 🔹 Simpan token di cookies (HttpOnly + Secure)
     res.cookie("user-cookies", token, {
-      httpOnly: true, // Mencegah akses dari JavaScript
-      secure: process.env.NODE_ENV === "production", // Aktifkan hanya di HTTPS
+      httpOnly: process.env.HTTPONLY, // Mencegah akses dari JavaScript
+      secure: process.env.SECURE,
       sameSite: "none",
       expires: dayjs().add(1, "day").toDate(),
     });
@@ -95,7 +95,12 @@ export const login = async (req: Request, res: Response) => {
 
 // **Logout** (Menghapus token di frontend)
 export const logout = async (req: Request, res: Response) => {
-  res.clearCookie("user-cookies");
+  res.clearCookie("user-cookies", {
+    httpOnly: process.env.HTTPONLY,
+    secure: process.env.SECURE,
+    path: "/",
+    sameSite: "none",
+  });
   return res.status(200).json({ code: 200, message: "Logout berhasil!" });
 };
 
@@ -130,7 +135,7 @@ export const updateUser = async (req: Request, res: Response) => {
 
 export const getMe = async (req: Request, res: Response) => {
   try {
-    const getCookies = req.cookies["user-cookies"];
+    const getCookies = await req.cookies["user-cookies"];
 
     if (!getCookies) {
       return res.status(403).json({
