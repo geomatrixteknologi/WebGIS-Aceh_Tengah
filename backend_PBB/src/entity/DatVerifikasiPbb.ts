@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("dat_verifikasi_pbb_pk", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "thnPajakSppt"], { unique: true })
-@Entity("dat_verifikasi_pbb", { schema: "public" })
+@Entity("dat_verifikasi_pbb")
 export class DatVerifikasiPbb {
   @Column("character", { name: "kd_propinsi", nullable: true, length: 2 })
   kdPropinsi!: string | null;

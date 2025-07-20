@@ -7,7 +7,7 @@ import { RefKecamatan } from "./RefKecamatan";
 @Index("a4_1_ak", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi", "nmKelurahan"], { unique: true })
 @Index("a4_2_ak", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi", "kdSektor"], { unique: true })
 @Index("ref_kelurahan_pkey", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi"], { unique: true })
-@Entity("ref_kelurahan", { schema: "public" })
+@Entity("ref_kelurahan")
 export class RefKelurahan {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

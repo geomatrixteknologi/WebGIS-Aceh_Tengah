@@ -2,7 +2,7 @@ import { Column, Entity, Index } from "typeorm";
 
 @Index("temp_znt_massal_pkey", ["jnsZntMassal", "kdBlok", "kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noZntMassal"], { unique: true })
 @Index("t2_d4_fk", ["kdBlok", "kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi"], {})
-@Entity("temp_znt_massal", { schema: "public" })
+@Entity("temp_znt_massal")
 export class TempZntMassal {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

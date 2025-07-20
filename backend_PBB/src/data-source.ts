@@ -73,7 +73,7 @@ import { RefPropinsi } from "./entity/RefPropinsi";
 
 dotenv.config();
 
-const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE } = process.env;
+const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_SCHEMA } = process.env;
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -82,9 +82,12 @@ export const AppDataSource = new DataSource({
   username: DB_USERNAME || "postgres",
   password: DB_PASSWORD || "root",
   database: DB_DATABASE || "PBB_MURA",
-  synchronize: true,
+  schema: DB_SCHEMA,
+  synchronize: false,
   logging: true,
-  ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: false } : false,
+  ssl: {
+    rejectUnauthorized: false, // untuk sementara (non-production)
+  },
   entities: [
     RefKecamatan,
     RefDati2,

@@ -2,7 +2,7 @@ import { Column, Entity, Index } from "typeorm";
 
 @Index("hrg_resource_pkey", ["kdDati2", "kdGroupResource", "kdPropinsi", "kdResource", "thnHrgResource"], { unique: true })
 @Index("c20_1_ak", ["kdDati2", "kdGroupResource", "kdPropinsi", "kdResource", "thnHrgResource"], { unique: true })
-@Entity("hrg_resource", { schema: "public" })
+@Entity("hrg_resource")
 export class HrgResource {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

@@ -2,7 +2,7 @@ import { Column, Entity, Index, JoinColumn, OneToOne } from "typeorm";
 import { DatOpBangunan } from "./DatOpBangunan";
 
 @Index("dat_jpb7_pkey", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noBng", "noUrut"], { unique: true })
-@Entity("dat_jpb7", { schema: "public" })
+@Entity("dat_jpb7")
 export class DatJpb7 {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

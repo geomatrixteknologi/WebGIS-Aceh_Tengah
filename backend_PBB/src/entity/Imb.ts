@@ -3,7 +3,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("bng_sin_imb_fk", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noBng", "noUrut"], {})
 @Index("rel_jenis_imb_fk", ["kdJnsImb"], {})
 @Index("imb_pkey", ["noImb"], { unique: true })
-@Entity("imb", { schema: "public" })
+@Entity("imb")
 export class Imb {
   @Column("character", { primary: true, name: "no_imb", length: 30 })
   noImb!: string;

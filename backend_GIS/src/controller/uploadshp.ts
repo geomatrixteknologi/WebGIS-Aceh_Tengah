@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { open } from "shapefile";
 import proj4 from "proj4";
-import { AppDataSource } from "@/data-resource";
-import { BatasKelurahan } from "@/entity/batasKelurahan";
-import { BatasPersil } from "@/entity/batasPersil";
+import { AppDataSource } from "../data-resource";
+import { BatasKelurahan } from "../entity/batasKelurahan";
+import { BatasPersil } from "../entity/batasPersil";
 import path from "path";
-import { BatasZNT } from "@/entity/batasZNT";
-import { BatasBlok } from "@/entity/batasBlok";
+import { BatasZNT } from "../entity/batasZNT";
+import { BatasBlok } from "../entity/batasBlok";
 
 // Definisi proyeksi UTM Zona 50S (EPSG:32750) dan WGS84 (EPSG:4326)
 const utm50s = "+proj=utm +zone=50 +south +datum=WGS84 +units=m +no_defs";

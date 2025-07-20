@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("ref_map_pkey", ["kdSektor"], { unique: true })
-@Entity("ref_map", { schema: "public" })
+@Entity("ref_map")
 export class RefMap {
   @Column("character", { primary: true, name: "kd_sektor", length: 2 })
   kdSektor!: string;

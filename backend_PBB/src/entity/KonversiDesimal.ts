@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("konversi_desimal_pkey", ["bilangan_10"], { unique: true })
-@Entity("konversi_desimal", { schema: "public" })
+@Entity("konversi_desimal")
 export class KonversiDesimal {
   @Column("character", { primary: true, name: "bilangan_10", length: 2 })
   bilangan_10!: string;

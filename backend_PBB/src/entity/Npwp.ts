@@ -3,7 +3,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("relation_2033_fk", ["kdKlu"], {})
 @Index("npwp_pkey", ["mfcab", "mfkpp", "mfnpwp"], { unique: true })
 @Index("peduduk_npwp_fk", ["noPenduduk"], {})
-@Entity("npwp", { schema: "public" })
+@Entity("npwp")
 export class Npwp {
   @Column("character", { primary: true, name: "mfnpwp", length: 9 })
   mfnpwp!: string;

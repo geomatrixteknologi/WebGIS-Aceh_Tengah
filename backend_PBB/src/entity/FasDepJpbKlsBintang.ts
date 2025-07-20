@@ -6,7 +6,7 @@ import { RefDati2 } from "./RefDati2";
 @Index("fas_dep_jpb_kls_bintang_pkey", ["kdDati2", "kdFasilitas", "kdJpb", "kdPropinsi", "klsBintang", "thnDepJpbKlsBintang"], { unique: true })
 @Index("c25_1_ak", ["kdDati2", "kdFasilitas", "kdJpb", "kdPropinsi", "klsBintang", "thnDepJpbKlsBintang"], { unique: true })
 @Index("c25_2_ak", ["kdDati2", "kdFasilitas", "kdJpb", "kdPropinsi", "klsBintang", "thnDepJpbKlsBintang"], { unique: true })
-@Entity("fas_dep_jpb_kls_bintang", { schema: "public" })
+@Entity("fas_dep_jpb_kls_bintang")
 export class FasDepJpbKlsBintang {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

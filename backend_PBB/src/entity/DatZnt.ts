@@ -5,7 +5,7 @@ import { RefKelurahan } from "./RefKelurahan";
 
 @Index("d1_1_ak", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi", "kdZnt"], { unique: true })
 @Index("dat_znt_pkey", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi", "kdZnt"], { unique: true })
-@Entity("dat_znt", { schema: "public" })
+@Entity("dat_znt")
 export class DatZnt {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

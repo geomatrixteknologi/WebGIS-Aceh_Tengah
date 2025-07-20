@@ -10,21 +10,27 @@ import { RefWarnaZNT } from "./entity/refWarnaZNT";
 import { BatasZNT } from "./entity/batasZNT";
 import { BatasBlok } from "./entity/batasBlok";
 import { RefWarnaKelurahan } from "./entity/refWarnaKelurahan";
+import { centerPoint } from "./entity/centerPoint";
+import { zoom } from "./entity/zoom";
 
 dotenv.config();
 
-const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE } = process.env;
+const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_SCHEMA } = process.env;
 
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: DB_HOST || "localhost",
+  host: DB_HOST,
   port: parseInt(DB_PORT || "5432"),
-  username: DB_USERNAME || "postgres",
-  password: DB_PASSWORD || "root",
-  database: DB_DATABASE || "gismura",
+  username: DB_USERNAME,
+  password: DB_PASSWORD,
+  database: DB_DATABASE,
+  schema: DB_SCHEMA,
   synchronize: true,
   logging: true,
-  entities: [BatasZNT, BatasKelurahan, BatasBlok, BatasPersil, RefWarnaKelurahan, RefWarnaStatusPembayaran, RefWarnaStatusPendaftaran, RefWarnaZNT, userAccount, accountRole],
+  ssl: {
+    rejectUnauthorized: false, // untuk sementara (non-production)
+  },
+  entities: [BatasZNT, BatasKelurahan, BatasBlok, BatasPersil, RefWarnaKelurahan, RefWarnaStatusPembayaran, RefWarnaStatusPendaftaran, RefWarnaZNT, userAccount, accountRole, centerPoint, zoom],
   subscribers: [],
   migrations: [],
 });

@@ -2,7 +2,7 @@ import { Column, Entity, Index } from "typeorm";
 
 @Index("y3_1_ak", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdKlsTanah", "kdPropinsi", "staThnNjopBumi"], {})
 @Index("sta_njop_bumi_pkey", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdKlsTanah", "kdPropinsi", "staThnNjopBumi", "thnAwalKlsTanah"], { unique: true })
-@Entity("sta_njop_bumi", { schema: "public" })
+@Entity("sta_njop_bumi")
 export class StaNjopBumi {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

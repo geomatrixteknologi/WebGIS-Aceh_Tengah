@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("sig_kartu_kredit_pkey", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noKartuKredit", "noKtp", "noUrut"], { unique: true })
-@Entity("sig_kartu_kredit", { schema: "public" })
+@Entity("sig_kartu_kredit")
 export class SigKartuKredit {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

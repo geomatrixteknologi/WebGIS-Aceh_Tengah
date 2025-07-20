@@ -3,7 +3,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("relation_1763_fk", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noBumi", "noUrut"], {})
 @Index("jenis_hak_bumi_sin_fk", ["kdJnsHak"], {})
 @Index("sertifikat_pkey", ["noSertifikat"], { unique: true })
-@Entity("sertifikat", { schema: "public" })
+@Entity("sertifikat")
 export class Sertifikat {
   @Column("character", { primary: true, name: "no_sertifikat", length: 30 })
   noSertifikat!: string;

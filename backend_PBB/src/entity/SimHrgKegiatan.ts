@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("sim_hrg_kegiatan_pkey", ["kdBngLantai", "kdDati2", "kdJpb", "kdKegiatan", "kdPekerjaan", "kdPropinsi", "simThnKegiatan", "tipeBng"], { unique: true })
-@Entity("sim_hrg_kegiatan", { schema: "public" })
+@Entity("sim_hrg_kegiatan")
 export class SimHrgKegiatan {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

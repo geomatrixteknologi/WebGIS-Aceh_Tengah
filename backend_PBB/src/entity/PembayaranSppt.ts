@@ -4,7 +4,7 @@ import { Pegawai } from "./Pegawai";
 import { SspPbbSppt } from "./SspPbbSppt";
 
 @Index("pembayaran_sppt_pkey", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "pembayaranSpptKe", "thnPajakSppt"], { unique: true })
-@Entity("pembayaran_sppt", { schema: "public" })
+@Entity("pembayaran_sppt")
 export class PembayaranSppt {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

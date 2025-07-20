@@ -1,6 +1,6 @@
 import { Column, Entity } from "typeorm";
 
-@Entity("z_his_sppt", { schema: "public" })
+@Entity("z_his_sppt")
 export class ZHisSppt {
   @Column("character", { name: "kd_propinsi", nullable: true, length: 2 })
   kdPropinsi!: string | null;

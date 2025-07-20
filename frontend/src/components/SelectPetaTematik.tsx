@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, IconButton, List, ListItemButton, ListItemText, Popover } from "@mui/material";
 import { useState } from "react";
 import ModalStatusOP from "./ModalStatusOP";
@@ -23,12 +24,12 @@ interface SelectPetaTematikProps {
   setKdKecZNT: React.Dispatch<React.SetStateAction<string>>;
   setKdKelZNT: React.Dispatch<React.SetStateAction<string>>;
   setTahunZNT: React.Dispatch<React.SetStateAction<string>>;
+  setLoading: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const SelectPetaTematik: React.FC<SelectPetaTematikProps> = ({ selectedTematik, setSelectedTematik, setOnChangeTematik, setIsZNT, setWarnaData, setKdKecZNT, setKdKelZNT, setTahunZNT }) => {
+const SelectPetaTematik: React.FC<SelectPetaTematikProps> = ({ selectedTematik, setSelectedTematik, setOnChangeTematik, setIsZNT, setWarnaData, setKdKecZNT, setKdKelZNT, setTahunZNT, setLoading }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedModal, setSelectedModal] = useState<string | null>(null);
-
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -45,6 +46,7 @@ const SelectPetaTematik: React.FC<SelectPetaTematikProps> = ({ selectedTematik, 
     const newStyles: Record<string, { color: string; weight: number; opacity: number; fillColor: string; fillOpacity: number }> = {};
 
     try {
+      setLoading(true);
       const warnaResponse = await axios.get<ApiResponse<WarnaData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/refwarnastatuspembayaran`);
       const warnaMap: Record<number, string> = {}; // Map id dengan WARNA
 
@@ -72,11 +74,14 @@ const SelectPetaTematik: React.FC<SelectPetaTematikProps> = ({ selectedTematik, 
       setIsZNT(false);
     } catch (error) {
       console.error("Error mengambil warna untuk status pembayaran:", error);
+    } finally {
+      setLoading(false); // 👉 End loading
     }
   };
 
   const handleStatusPendaftaran = async () => {
     try {
+      setLoading(true);
       const [datOpBumiResponse, batasPersilResponse, warnaResponse] = await Promise.all([
         axios.get<ApiResponse<DatOpBumiData>>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/datopbumi`),
         axios.get<ApiResponse<PersilData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataspersil`),
@@ -126,11 +131,14 @@ const SelectPetaTematik: React.FC<SelectPetaTematikProps> = ({ selectedTematik, 
       setIsZNT(false);
     } catch (error) {
       console.error("Error mengambil warna untuk status pendaftaran:", error);
+    } finally {
+      setLoading(false); // 👉 End loading
     }
   };
 
   const handleZNTData = async (zntData: ZNTData[]) => {
     try {
+      setLoading(true);
       const warnaResponse = await axios.get<ApiResponse<WarnaData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/refwarnaznt`);
       const warnaMap: Record<string, string> = {}; // Map STATUS dengan WARNA
 
@@ -160,11 +168,14 @@ const SelectPetaTematik: React.FC<SelectPetaTematikProps> = ({ selectedTematik, 
       setIsZNT(true);
     } catch (error) {
       console.error("Error mengambil warna untuk peta ZNT:", error);
+    } finally {
+      setLoading(false); // 👉 End loading
     }
   };
 
   const handleSebaranZNTData = async (sebaranZNTData: SebaranZNTData[]) => {
     try {
+      setLoading(true);
       const warnaResponse = await axios.get<ApiResponse<WarnaData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/refwarnaznt`);
       const warnaMap: Record<string, string> = {}; // Map STATUS dengan WARNA
 
@@ -194,6 +205,8 @@ const SelectPetaTematik: React.FC<SelectPetaTematikProps> = ({ selectedTematik, 
       setIsZNT(true);
     } catch (error) {
       console.error("Error mengambil warna untuk sebaran ZNT:", error);
+    } finally {
+      setLoading(false); // 👉 End loading
     }
   };
 

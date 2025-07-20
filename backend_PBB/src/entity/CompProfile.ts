@@ -5,7 +5,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("comp_profile_pkey", ["mfcabComp", "mfkppComp", "mfnpwpComp"], {
   unique: true,
 })
-@Entity("comp_profile", { schema: "public" })
+@Entity("comp_profile")
 export class CompProfile {
   @Column("character", { primary: true, name: "mfnpwp_comp", length: 9 })
   mfnpwpComp!: string;

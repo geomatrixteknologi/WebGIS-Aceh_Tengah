@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("max_stts_pkey", ["thnPajakSppt"], { unique: true })
-@Entity("max_stts", { schema: "public" })
+@Entity("max_stts")
 export class MaxStts {
   @Column("character", { primary: true, name: "thn_pajak_sppt", length: 4 })
   thnPajakSppt!: string;

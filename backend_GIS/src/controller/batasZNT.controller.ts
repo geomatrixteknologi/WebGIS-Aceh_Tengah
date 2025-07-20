@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../data-resource";
-import { BatasZNT } from "@/entity/batasZNT";
+import { BatasZNT } from "../entity/batasZNT";
 
 export const getBatasZNTbyKecKelTahun = async (req: Request, res: Response) => {
   try {

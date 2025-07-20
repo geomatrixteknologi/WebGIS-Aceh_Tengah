@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
-import { AppDataSource } from "../data-resource";
-import { BatasPersil } from "@/entity/batasPersil";
 import { HeadObjectCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
-import s3 from "@/utils/s3";
+import s3 from "../utils/s3";
 
 // export const GetFotoPersil = async (req: Request, res: Response) => {
 //   try {

@@ -33,7 +33,7 @@ import { Column, Entity, Index } from "typeorm";
   {}
 )
 @Index("h3_l6_fk", ["jnsSk", "kdKantor", "kdKanwil", "noSk"], {})
-@Entity("pembetulan_keberatan", { schema: "public" })
+@Entity("pembetulan_keberatan")
 export class PembetulanKeberatan {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

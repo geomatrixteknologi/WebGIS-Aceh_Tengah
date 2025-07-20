@@ -4,7 +4,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("ref_upb_pkey", ["kdPbi", "kdPebin", "kdPpbi", "kdUpb"], {
   unique: true,
 })
-@Entity("ref_upb", { schema: "public" })
+@Entity("ref_upb")
 export class RefUpb {
   @Column("character", { primary: true, name: "kd_pebin", length: 2 })
   kdPebin!: string;

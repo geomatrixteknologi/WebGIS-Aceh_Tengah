@@ -1,6 +1,6 @@
 import { Column, Entity } from "typeorm";
 
-@Entity("my_sppt_bayar_kolektif", { schema: "public" })
+@Entity("my_sppt_bayar_kolektif")
 export class MySpptBayarKolektif {
   @Column("character", { name: "kd_propinsi", nullable: true, length: 2 })
   kdPropinsi!: string | null;

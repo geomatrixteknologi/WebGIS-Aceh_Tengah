@@ -3,7 +3,7 @@ import { RefDati2 } from "./RefDati2";
 
 @Index("dbkb_jpb3_pkey", ["kdDati2", "kdPropinsi", "lbrBentMaxDbkbJpb3", "lbrBentMinDbkbJpb3", "thnDbkbJpb3", "tingKolomMaxDbkbJpb3", "tingKolomMinDbkbJpb3"], { unique: true })
 @Index("c29_1_ak", ["kdDati2", "kdPropinsi", "lbrBentMaxDbkbJpb3", "lbrBentMinDbkbJpb3", "thnDbkbJpb3", "tingKolomMaxDbkbJpb3", "tingKolomMinDbkbJpb3"], { unique: true })
-@Entity("dbkb_jpb3", { schema: "public" })
+@Entity("dbkb_jpb3")
 export class DbkbJpb3 {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

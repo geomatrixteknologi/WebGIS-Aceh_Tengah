@@ -1,6 +1,6 @@
 import { Column, Entity } from "typeorm";
 
-@Entity("d_reversal_kolektif", { schema: "public" })
+@Entity("d_reversal_kolektif")
 export class DReversalKolektif {
   @Column("character varying", {
     name: "kode_bayar",

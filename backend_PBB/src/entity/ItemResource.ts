@@ -3,7 +3,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("item_resource_pkey", ["kdGroupResource", "kdResource"], {
   unique: true,
 })
-@Entity("item_resource", { schema: "public" })
+@Entity("item_resource")
 export class ItemResource {
   @Column("character", { primary: true, name: "kd_group_resource", length: 2 })
   kdGroupResource!: string;

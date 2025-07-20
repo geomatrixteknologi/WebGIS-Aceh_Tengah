@@ -3,7 +3,7 @@ import { Fasilitas } from "./Fasilitas";
 import { DatOpBangunan } from "./DatOpBangunan";
 
 @Index("dat_fasilitas_bangunan_pkey", ["kdBlok", "kdDati2", "kdFasilitas", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noBng", "noUrut"], { unique: true })
-@Entity("dat_fasilitas_bangunan", { schema: "public" })
+@Entity("dat_fasilitas_bangunan")
 export class DatFasilitasBangunan {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

@@ -6,7 +6,7 @@ import { Pegawai } from "./Pegawai";
 import { TtrStp } from "./TtrStp";
 
 @Index("stp_pkey", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "tglTerbitStp"], { unique: true })
-@Entity("stp", { schema: "public" })
+@Entity("stp")
 export class Stp {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

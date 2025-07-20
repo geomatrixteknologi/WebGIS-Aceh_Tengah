@@ -4,7 +4,7 @@ import { Column, Entity, Index } from "typeorm";
   unique: true,
 })
 @Index("pam_rek_pam_fk", ["noPelangganPam"], {})
-@Entity("rek_pam", { schema: "public" })
+@Entity("rek_pam")
 export class RekPam {
   @Column("character", { primary: true, name: "no_pelanggan_pam", length: 12 })
   noPelangganPam!: string;

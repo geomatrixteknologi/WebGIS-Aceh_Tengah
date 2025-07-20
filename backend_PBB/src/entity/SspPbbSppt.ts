@@ -2,7 +2,7 @@ import { Column, Entity, Index, JoinColumn, OneToOne } from "typeorm";
 import { PembayaranSppt } from "./PembayaranSppt";
 
 @Index("ssp_pbb_sppt_pkey", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "pembayaranSpptKe", "thnPajakSppt"], { unique: true })
-@Entity("ssp_pbb_sppt", { schema: "public" })
+@Entity("ssp_pbb_sppt")
 export class SspPbbSppt {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

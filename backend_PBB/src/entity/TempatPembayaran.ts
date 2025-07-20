@@ -7,7 +7,7 @@ import { Stp } from "./Stp";
 @Index("tempat_pembayaran_pkey", ["kdKantor", "kdKanwil", "kdTp"], {
   unique: true,
 })
-@Entity("tempat_pembayaran", { schema: "public" })
+@Entity("tempat_pembayaran")
 export class TempatPembayaran {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

@@ -4,7 +4,7 @@ import { DatJpb8 } from "./DatJpb8";
 import { DbkbDayaDukung } from "./DbkbDayaDukung";
 
 @Index("daya_dukung_pkey", ["typeKonstruksi"], { unique: true })
-@Entity("daya_dukung", { schema: "public" })
+@Entity("daya_dukung")
 export class DayaDukung {
   @Column("character", { primary: true, name: "type_konstruksi", length: 1 })
   typeKonstruksi!: string;

@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("penyusutan_pkey", ["kdRangePenyusutan", "kondisiBngSusut", "umurEfektif"], { unique: true })
-@Entity("penyusutan", { schema: "public" })
+@Entity("penyusutan")
 export class Penyusutan {
   @Column("smallint", { primary: true, name: "umur_efektif" })
   umurEfektif!: number;

@@ -3,7 +3,7 @@ import { RefKelurahan } from "./RefKelurahan";
 import { Pegawai } from "./Pegawai";
 
 @Index("penghapusan_op_se14_pkey", ["kdBlokPenghapusan", "kdDati2", "kdJnsOpPenghapusan", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrutPenghapusan"], { unique: true })
-@Entity("penghapusan_op_se14", { schema: "public" })
+@Entity("penghapusan_op_se14")
 export class PenghapusanOpSe14 {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

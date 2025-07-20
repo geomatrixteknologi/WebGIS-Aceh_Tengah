@@ -44,7 +44,7 @@ import { Column, Entity, Index } from "typeorm";
   { unique: true }
 )
 @Index("i1_l6_fk", ["jnsSk", "kdKantor", "kdKanwil", "noSk"], {})
-@Entity("pengurangan_denda_adm", { schema: "public" })
+@Entity("pengurangan_denda_adm")
 export class PenguranganDendaAdm {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

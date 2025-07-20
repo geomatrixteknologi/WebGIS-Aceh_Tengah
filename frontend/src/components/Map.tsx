@@ -14,12 +14,33 @@ import MarkerClusterGroup from "react-leaflet-markercluster";
 
 import { ApiResponse, GeomData, WarnaKelData } from "@/utility/Interfaces";
 import { defaultGeoJsonStyle, defaultGeoJsonStyleBlok, defaultGeoJsonStyleKelurahan } from "@/utility/GeoJSONStyles";
-import { Box } from "@mui/material";
+import { Backdrop, Box, CircularProgress } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 
-const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolygon }: { onChangeTematik: any; selectedTematik: string; isZNT: boolean; setIsZNT: (value: boolean) => void; searchedPolygon: any; searchedNOP: any }) => {
+const Maps = ({
+  onChangeTematik,
+  selectedTematik,
+  isZNT,
+  setIsZNT,
+  searchedPolygon,
+  latitudeCP,
+  longitudeCP,
+  loading,
+  setLoading,
+}: {
+  onChangeTematik: any;
+  selectedTematik: string;
+  isZNT: boolean;
+  setIsZNT: (value: boolean) => void;
+  searchedPolygon: any;
+  searchedNOP: any;
+  latitudeCP: any;
+  longitudeCP: any;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<any>>;
+}) => {
   const [geoJsonDataKelurahan, setGeoJsonDataKelurahan] = useState<GeoJSON.FeatureCollection | null>(null);
   const [geoJsonDataBlok, setGeoJsonDataBlok] = useState<GeoJSON.FeatureCollection | null>(null);
   const [geoJsonDataPersil, setGeoJsonDataPersil] = useState<GeoJSON.FeatureCollection | null>(null);
@@ -38,6 +59,7 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
   });
   const [fotoPersil, setFotoPersil] = useState<string[] | null>(null);
   const [dataTitik, setDataTitik] = useState<any>([]);
+
   // const [geoKelurahan, setGeoKelurahan] = useState<any>([]);
   // const [geoBlok, setGeoBlok] = useState<any>([]);
   // const [clusteredData, setClusteredData] = useState<any>({});
@@ -46,6 +68,7 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
     // Fetch data kelurahan dari API
     const fetchDataKel = async () => {
       try {
+        setLoading(true);
         const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataskelurahan`);
         setGeoJsonDataKelurahan({
           type: "FeatureCollection",
@@ -58,16 +81,19 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
         }
         console.error("Error fetching data:", error);
         return { code: 500, data: [], message: "Terjadi kesalahan" };
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchDataKel();
-  }, []);
+  }, [setLoading]);
 
   useEffect(() => {
     // Fetch data blok dari API
     const fetchDataBlok = async () => {
       try {
+        setLoading(true);
         const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/batasblok`);
         setGeoJsonDataBlok({
           type: "FeatureCollection",
@@ -80,16 +106,19 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
         }
         console.error("Error fetching data:", error);
         return { code: 500, data: [], message: "Terjadi kesalahan" };
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchDataBlok();
-  }, []);
+  }, [setLoading]);
 
   useEffect(() => {
     // Fetch data persil dari API
     const fetchDataPersil = async () => {
       try {
+        setLoading(true);
         const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataspersil`);
         setGeoJsonDataPersil({
           type: "FeatureCollection",
@@ -102,16 +131,19 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
         }
         console.error("Error fetching data:", error);
         return { code: 500, data: [], message: "Terjadi kesalahan" };
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchDataPersil();
-  }, []);
+  }, [setLoading]);
 
   useEffect(() => {
     // Fetch data ZNT dari API
     const fetchDataZNT = async () => {
       try {
+        setLoading(true);
         const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/batasznt`);
         setGeoJsonDataZNT({
           type: "FeatureCollection",
@@ -124,11 +156,13 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
         }
         console.error("Error fetching data:", error);
         return { code: 500, data: [], message: "Terjadi kesalahan" };
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchDataZNT();
-  }, []);
+  }, [setLoading]);
 
   // if onChangeTematik berubah dari parent state
   useEffect(() => {
@@ -144,6 +178,7 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
   useEffect(() => {
     const fetchWarnaKel = async () => {
       try {
+        setLoading(true);
         const warnaKelResponse = await axios.get<ApiResponse<WarnaKelData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/refwarnakelurahan`);
         const warnaMap: Record<string, string> = {}; // Map ID to WARNA
         const newStylesPersil: Record<string, { color: string; weight: number; opacity: number; fillColor: string; fillOpacity: number }> = {};
@@ -187,11 +222,13 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
         }
         console.error("Error fetching data:", error);
         return { code: 500, data: [], message: "Terjadi kesalahan" };
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchWarnaKel();
-  }, [geoJsonDataKelurahan]);
+  }, [geoJsonDataKelurahan, setLoading]);
 
   const onEachFeatureKel = (feature: any, layer: any) => {
     if (feature.properties && feature.properties.NM_KEL) {
@@ -217,15 +254,17 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
         setSearchNop("data tidak ditemukan");
       }
       try {
+        setLoading(true);
         const fotoResponse = await axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/fotopersil/${NOP}`);
         setFotoPersil(fotoResponse.data.imageUrls);
       } catch (error: any) {
         toast.error(error.response?.data?.message || "NOP tidak Valid");
+      } finally {
+        setLoading(false);
+        setGeomData(feature.geometry);
+        setSearchNop(NOP);
+        setDrawerOpen(true);
       }
-
-      setGeomData(feature.geometry);
-      setSearchNop(NOP);
-      setDrawerOpen(true);
     });
   };
 
@@ -367,15 +406,26 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const res = await axios.get<any>(`${process.env.NEXT_PUBLIC_PENDATAAN_API_URL}/api/get/gettitikpendataan`); // sesuaikan endpoint
         setDataTitik(res.data.data);
       } catch (err) {
         console.error("Gagal mengambil data titik pendataan:", err);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [setLoading]);
+
+  if (latitudeCP === 0 || longitudeCP === 0) {
+    return (
+      <Backdrop open sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    );
+  }
 
   return (
     <>
@@ -403,7 +453,7 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
         {/* dropdown basemap icon */}
         <IconLayerControl selectedLayer={selectedLayerBasemap} setSelectedLayer={setSelectedLayerBasemap} layerType={"Basemap"} />
 
-        {/* dropdown basemap icon */}
+        {/* dropdown titik pendataan icon */}
         <IconLayerControl selectedLayer={selectedLayerTtik} setSelectedLayer={setSelectedLayerTitik} layerType={"Titik"} />
 
         {/* dropdown batas icon */}
@@ -423,7 +473,7 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
           style={{
             height: "100vh",
           }}
-          center={[-0.637, 114.571]}
+          center={[latitudeCP, longitudeCP]}
           zoom={13}
           scrollWheelZoom={true}
           zoomControl={false}
@@ -628,6 +678,9 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
 
           <ZoomControl position="bottomright" />
         </MapContainer>
+        <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={loading}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
       </div>
     </>
   );

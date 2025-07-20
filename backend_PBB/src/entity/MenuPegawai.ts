@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("menu_pegawai_pkey", ["nip"], { unique: true })
-@Entity("menu_pegawai", { schema: "public" })
+@Entity("menu_pegawai")
 export class MenuPegawai {
   @Column("character", { primary: true, name: "nip", length: 18 })
   nip!: string;

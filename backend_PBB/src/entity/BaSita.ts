@@ -2,7 +2,7 @@ import { Column, Entity, Index } from "typeorm";
 
 @Index("g21_g15_fk", ["kdKantor", "kdKanwil", "noSpmp"], {})
 @Index("ba_sita_pkey", ["kdKantor", "kdKanwil", "noBaSita"], { unique: true })
-@Entity("ba_sita", { schema: "public" })
+@Entity("ba_sita")
 export class BaSita {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

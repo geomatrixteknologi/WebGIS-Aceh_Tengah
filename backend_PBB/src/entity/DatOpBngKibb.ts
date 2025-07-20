@@ -3,7 +3,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("bng_sin_kibt_fk2", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noBng", "noUrut"], {})
 @Index("dat_op_bng_kibb_pkey", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdKibb", "kdPbi", "kdPebin", "kdPpbi", "kdPropinsi", "kdUpb", "noBng", "noUrut"], { unique: true })
 @Index("bng_sin_kibt_fk", ["kdKibb", "kdPbi", "kdPebin", "kdPpbi", "kdUpb"], {})
-@Entity("dat_op_bng_kibb", { schema: "public" })
+@Entity("dat_op_bng_kibb")
 export class DatOpBngKibb {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

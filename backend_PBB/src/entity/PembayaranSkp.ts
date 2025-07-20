@@ -5,7 +5,7 @@ import { Pegawai } from "./Pegawai";
 
 @Index("pembayaran_skp_pkey", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "pembayaranSkpKe", "tglTerbitSkp", "thnPajakSkp"], { unique: true })
 @Index("g24_1_ak", ["kdBlok", "kdDati2", "kdJnsOp", "kdKantor", "kdKanwil", "kdKecamatan", "kdKelurahan", "kdPropinsi", "kdTp", "noUrut", "pembayaranSkpKe", "thnPajakSkp"], {})
-@Entity("pembayaran_skp", { schema: "public" })
+@Entity("pembayaran_skp")
 export class PembayaranSkp {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

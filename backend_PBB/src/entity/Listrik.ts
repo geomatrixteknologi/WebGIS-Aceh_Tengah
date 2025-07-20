@@ -2,7 +2,7 @@ import { Column, Entity, Index } from "typeorm";
 
 @Index("bng_sin_listrik_fk", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noBng", "noUrut"], {})
 @Index("listrik_pkey", ["noPelangganPln"], { unique: true })
-@Entity("listrik", { schema: "public" })
+@Entity("listrik")
 export class Listrik {
   @Column("character", { primary: true, name: "no_pelanggan_pln", length: 12 })
   noPelangganPln!: string;

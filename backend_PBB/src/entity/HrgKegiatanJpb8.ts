@@ -2,7 +2,7 @@ import { Column, Entity, Index } from "typeorm";
 
 @Index("c19_1_ak", ["kdDati2", "kdKegiatan", "kdPekerjaan", "kdPropinsi", "lbrBentMaxHrgJpb8", "lbrBentMinHrgJpb8", "thnHrgPekerjaanJpb8", "tingKolomMaxHrgJpb8", "tingKolomMinHrgJpb8"], { unique: true })
 @Index("hrg_kegiatan_jpb8_pkey", ["kdDati2", "kdKegiatan", "kdPekerjaan", "kdPropinsi", "lbrBentMaxHrgJpb8", "lbrBentMinHrgJpb8", "thnHrgPekerjaanJpb8", "tingKolomMaxHrgJpb8", "tingKolomMinHrgJpb8"], { unique: true })
-@Entity("hrg_kegiatan_jpb8", { schema: "public" })
+@Entity("hrg_kegiatan_jpb8")
 export class HrgKegiatanJpb8 {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

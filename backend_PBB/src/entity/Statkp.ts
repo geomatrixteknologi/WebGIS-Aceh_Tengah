@@ -1,6 +1,6 @@
 import { Column, Entity } from "typeorm";
 
-@Entity("statkp", { schema: "public" })
+@Entity("statkp")
 export class Statkp {
   @Column("character varying", { name: "nmkp", nullable: true, length: 50 })
   nmkp!: string | null;

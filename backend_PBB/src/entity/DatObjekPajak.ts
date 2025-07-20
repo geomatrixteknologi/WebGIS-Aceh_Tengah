@@ -16,7 +16,7 @@ import { Stp } from "./Stp";
 @Index("d7_4_ak", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "kdStatusCabang", "noUrut"], { unique: true })
 @Index("d7_3_ak", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "nipPerekamOp", "noUrut"], { unique: true })
 @Index("d7_1_ak", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "subjekPajakId"], { unique: true })
-@Entity("dat_objek_pajak", { schema: "public" })
+@Entity("dat_objek_pajak")
 export class DatObjekPajak {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

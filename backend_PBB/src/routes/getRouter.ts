@@ -5,6 +5,7 @@ import { getDetailObjekPajak } from "../controllers/getDetailNOP";
 import { getSpptbyTahun } from "../controllers/sppt.controller";
 import { getDatOpBumi } from "../controllers/datOpBumi.controller";
 import { getSebaranZntDatObjekPajak } from "../controllers/sebaranZntDatObjekPajak.controller";
+import { getNamaWajibPajak } from "../controllers/getNamaWajibPajak";
 
 const retrieveRouter = Router();
 
@@ -15,5 +16,6 @@ retrieveRouter.get("/kodekelurahan", getKodeKelurahan as any);
 retrieveRouter.get("/detailnop", getDetailObjekPajak as any);
 retrieveRouter.get("/spptbytahun", getSpptbyTahun as any);
 retrieveRouter.get("/datopbumi", getDatOpBumi as any);
+retrieveRouter.get("/carinama", getNamaWajibPajak as any);
 
 export default retrieveRouter;

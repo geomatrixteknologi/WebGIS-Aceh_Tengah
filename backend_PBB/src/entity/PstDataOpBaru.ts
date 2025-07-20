@@ -8,7 +8,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("f5_1_ak", ["bundelPelayanan", "kdBlokPemohon", "kdDati2Pemohon", "kdJnsOpPemohon", "kdKantor", "kdKanwil", "kdKecamatanPemohon", "kdKelurahanPemohon", "kdPropinsiPemohon", "noUrutPelayanan", "noUrutPemohon", "thnPelayanan"], {
   unique: true,
 })
-@Entity("pst_data_op_baru", { schema: "public" })
+@Entity("pst_data_op_baru")
 export class PstDataOpBaru {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("peta_sig_pkey", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi"], { unique: true })
-@Entity("peta_sig", { schema: "public" })
+@Entity("peta_sig")
 export class PetaSig {
   @Column("character varying", {
     primary: true,

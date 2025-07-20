@@ -22,7 +22,7 @@ import { Column, Entity, Index } from "typeorm";
   ],
   { unique: true }
 )
-@Entity("his_berkas_terima", { schema: "public" })
+@Entity("his_berkas_terima")
 export class HisBerkasTerima {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

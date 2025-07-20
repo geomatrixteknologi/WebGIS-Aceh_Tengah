@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("perkembangan_pokok_pkey", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi", "tglPokok"], { unique: true })
-@Entity("perkembangan_pokok", { schema: "public" })
+@Entity("perkembangan_pokok")
 export class PerkembanganPokok {
   @Column("timestamp without time zone", { primary: true, name: "tgl_pokok" })
   tglPokok!: Date;

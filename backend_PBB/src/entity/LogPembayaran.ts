@@ -1,6 +1,6 @@
 import { Column, Entity } from "typeorm";
 
-@Entity("log_pembayaran", { schema: "public" })
+@Entity("log_pembayaran")
 export class LogPembayaran {
   @Column("character varying", {
     name: "kode_bayar",

@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("adj_bangunan_jpb8_pkey", ["kdAdj", "lbrBentMaxAdj", "lbrBentMinAdj", "tingKolomMaxAdj", "tingKolomMinAdj"], { unique: true })
-@Entity("adj_bangunan_jpb8", { schema: "public" })
+@Entity("adj_bangunan_jpb8")
 export class AdjBangunanJpb8 {
   @Column("character", { primary: true, name: "kd_adj", length: 2 })
   kdAdj!: string;

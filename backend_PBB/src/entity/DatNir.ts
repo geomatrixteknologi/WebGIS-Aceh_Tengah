@@ -5,7 +5,7 @@ import { DatZnt } from "./DatZnt";
 @Index("dat_nir_pkey", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi", "kdZnt", "thnNirZnt"], { unique: true })
 @Index("d2_3_ak", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi", "kdZnt", "thnNirZnt"], { unique: true })
 @Index("d2_2_ak", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi", "kdZnt", "thnNirZnt"], { unique: true })
-@Entity("dat_nir", { schema: "public" })
+@Entity("dat_nir")
 export class DatNir {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

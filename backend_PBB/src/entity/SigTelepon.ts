@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("sig_telepon_pkey", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "kodeArea", "noTelepon", "noUrut"], { unique: true })
-@Entity("sig_telepon", { schema: "public" })
+@Entity("sig_telepon")
 export class SigTelepon {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

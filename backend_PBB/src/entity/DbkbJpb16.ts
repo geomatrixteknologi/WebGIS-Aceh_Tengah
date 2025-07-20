@@ -3,7 +3,7 @@ import { RefDati2 } from "./RefDati2";
 
 @Index("dbkb_jpb16_pkey", ["kdDati2", "kdPropinsi", "klsDbkbJpb16", "lantaiMaxJpb16", "lantaiMinJpb16", "thnDbkbJpb16"], { unique: true })
 @Index("c42_1_ak", ["kdDati2", "kdPropinsi", "klsDbkbJpb16", "lantaiMaxJpb16", "lantaiMinJpb16", "thnDbkbJpb16"], { unique: true })
-@Entity("dbkb_jpb16", { schema: "public" })
+@Entity("dbkb_jpb16")
 export class DbkbJpb16 {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

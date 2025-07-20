@@ -3,7 +3,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("g19_1_ak", ["kdKantor", "kdKanwil", "noSpmp", "statusLelang"], {})
 @Index("g19_g15_fk", ["kdKantor", "kdKanwil", "noSpmp"], {})
 @Index("permintaan_jadual_lelang_pkey", ["kdKantor", "kdKanwil", "noPmtJdlLelang"], { unique: true })
-@Entity("permintaan_jadual_lelang", { schema: "public" })
+@Entity("permintaan_jadual_lelang")
 export class PermintaanJadualLelang {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

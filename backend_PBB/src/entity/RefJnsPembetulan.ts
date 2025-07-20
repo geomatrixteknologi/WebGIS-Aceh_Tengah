@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("ref_jns_pembetulan_pkey", ["kdPembetulan"], { unique: true })
-@Entity("ref_jns_pembetulan", { schema: "public" })
+@Entity("ref_jns_pembetulan")
 export class RefJnsPembetulan {
   @Column("character", { primary: true, name: "kd_pembetulan", length: 2 })
   kdPembetulan!: string;

@@ -2,7 +2,7 @@ import { Column, Entity, Index } from "typeorm";
 
 @Index("bng_sin_pam_fk", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noBng", "noUrut"], {})
 @Index("pam_pkey", ["noPelangganPam"], { unique: true })
-@Entity("pam", { schema: "public" })
+@Entity("pam")
 export class Pam {
   @Column("character", { primary: true, name: "no_pelanggan_pam", length: 12 })
   noPelangganPam!: string;

@@ -3,7 +3,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("dat_op_sin_pkey", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut"], { unique: true })
 @Index("opsin_jns_sin_fk", ["kdJnsSin"], {})
 @Index("pegawai_op_sin_fk", ["nipPendata"], {})
-@Entity("dat_op_sin", { schema: "public" })
+@Entity("dat_op_sin")
 export class DatOpSin {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

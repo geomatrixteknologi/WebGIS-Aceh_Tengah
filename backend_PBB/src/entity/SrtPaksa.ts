@@ -4,7 +4,7 @@ import { Column, Entity, Index } from "typeorm";
   unique: true,
 })
 @Index("g14_g12_fk3", ["noSrtTegoran"], {})
-@Entity("srt_paksa", { schema: "public" })
+@Entity("srt_paksa")
 export class SrtPaksa {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

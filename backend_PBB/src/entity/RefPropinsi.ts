@@ -3,7 +3,7 @@ import { RefDati2 } from "./RefDati2";
 
 @Index("ref_propinsi_pkey", ["kdPropinsi"], { unique: true })
 @Index("a1_1_ak", ["kdPropinsi", "nmPropinsi"], { unique: true })
-@Entity("ref_propinsi", { schema: "public" })
+@Entity("ref_propinsi")
 export class RefPropinsi {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

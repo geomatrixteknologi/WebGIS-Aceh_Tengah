@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../data-resource";
-import { BatasPersil } from "@/entity/batasPersil";
+import { BatasPersil } from "../entity/batasPersil";
 import { IsNull, Not } from "typeorm";
 import axios from "axios";
 

@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("group_resource_pkey", ["kdGroupResource"], { unique: true })
-@Entity("group_resource", { schema: "public" })
+@Entity("group_resource")
 export class GroupResource {
   @Column("character", { primary: true, name: "kd_group_resource", length: 2 })
   kdGroupResource!: string;

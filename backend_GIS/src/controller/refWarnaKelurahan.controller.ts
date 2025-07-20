@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../data-resource";
-import { RefWarnaKelurahan } from "@/entity/refWarnaKelurahan";
+import { RefWarnaKelurahan } from "../entity/refWarnaKelurahan";
 
 export const getRefWarnaKelurahan = async (req: Request, res: Response) => {
   try {

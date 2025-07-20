@@ -2,7 +2,7 @@ import { Column, Entity, Index } from "typeorm";
 
 @Index("comp_pemegang_saham_fk", ["mfcabComp", "mfkppComp", "mfnpwpComp"], {})
 @Index("pemegang_saham_pkey", ["mfcabComp", "mfcabPemegang", "mfkppComp", "mfkppPemegang", "mfnpwpComp", "mfnpwpPemegang"], { unique: true })
-@Entity("pemegang_saham", { schema: "public" })
+@Entity("pemegang_saham")
 export class PemegangSaham {
   @Column("character", { primary: true, name: "mfnpwp_comp", length: 9 })
   mfnpwpComp!: string;

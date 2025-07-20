@@ -5,7 +5,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("x1_2_ak", ["hisIndeksPerubahanSppt", "hisKdKlsTanah", "kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "thnPajakSppt"], { unique: true })
 @Index("his_sppt_pkey", ["hisIndeksPerubahanSppt", "kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "thnPajakSppt"], { unique: true })
 @Index("x1_l6_fk", ["jnsSk", "kdKantor", "kdKanwil", "noSk"], {})
-@Entity("his_sppt", { schema: "public" })
+@Entity("his_sppt")
 export class HisSppt {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

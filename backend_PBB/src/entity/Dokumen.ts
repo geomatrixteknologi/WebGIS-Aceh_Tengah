@@ -3,7 +3,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("dokumen_pkey", ["jnsDokumen", "kdKantor", "kdKanwil", "noDokumen"], {
   unique: true,
 })
-@Entity("dokumen", { schema: "public" })
+@Entity("dokumen")
 export class Dokumen {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

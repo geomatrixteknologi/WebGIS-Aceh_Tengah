@@ -4,7 +4,7 @@ import { DatObjekPajak } from "./DatObjekPajak";
 @Index("d33_d7_fk", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut"], {})
 @Index("d33_1_ak", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "subjekPajakId"], { unique: true })
 @Index("dat_subjek_pajak_njoptkp_pkey", ["subjekPajakId"], { unique: true })
-@Entity("dat_subjek_pajak_njoptkp", { schema: "public" })
+@Entity("dat_subjek_pajak_njoptkp")
 export class DatSubjekPajakNjoptkp {
   @Column("character", { primary: true, name: "subjek_pajak_id", length: 30 })
   subjekPajakId!: string;

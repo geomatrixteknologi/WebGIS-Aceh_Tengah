@@ -1,6 +1,6 @@
 import { Column, Entity } from "typeorm";
 
-@Entity("dat_akses_verifi", { schema: "public" })
+@Entity("dat_akses_verifi")
 export class DatAksesVerifi {
   @Column("character varying", { name: "akses_id", nullable: true, length: 10 })
   aksesId!: string | null;

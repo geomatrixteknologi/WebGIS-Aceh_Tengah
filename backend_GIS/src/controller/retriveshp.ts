@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { AppDataSource } from "@/data-resource";
-import { BatasKelurahan } from "@/entity/batasKelurahan";
-import { BatasPersil } from "@/entity/batasPersil";
-import { BatasZNT } from "@/entity/batasZNT";
-import { BatasBlok } from "@/entity/batasBlok";
+import { AppDataSource } from "../data-resource";
+import { BatasKelurahan } from "../entity/batasKelurahan";
+import { BatasPersil } from "../entity/batasPersil";
+import { BatasZNT } from "../entity/batasZNT";
+import { BatasBlok } from "../entity/batasBlok";
 
 export const getBatasKelurahan = async (req: Request, res: Response) => {
   try {

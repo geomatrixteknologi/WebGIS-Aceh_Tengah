@@ -1,6 +1,6 @@
 import { Column, Entity } from "typeorm";
 
-@Entity("dat_role_verifi", { schema: "public" })
+@Entity("dat_role_verifi")
 export class DatRoleVerifi {
   @Column("character varying", { name: "role_id", nullable: true, length: 5 })
   roleId!: string | null;

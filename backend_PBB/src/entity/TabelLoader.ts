@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("tabel_loader_pkey", ["namaTabel"], { unique: true })
-@Entity("tabel_loader", { schema: "public" })
+@Entity("tabel_loader")
 export class TabelLoader {
   @Column("character varying", {
     primary: true,

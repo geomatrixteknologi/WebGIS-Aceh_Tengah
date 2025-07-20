@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("lookup_item_pkey", ["kdLookupGroup", "kdLookupItem"], { unique: true })
-@Entity("lookup_item", { schema: "public" })
+@Entity("lookup_item")
 export class LookupItem {
   @Column("character", { primary: true, name: "kd_lookup_group", length: 2 })
   kdLookupGroup!: string;
