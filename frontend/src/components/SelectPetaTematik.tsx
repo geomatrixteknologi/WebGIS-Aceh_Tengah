@@ -47,7 +47,9 @@ const SelectPetaTematik: React.FC<SelectPetaTematikProps> = ({ selectedTematik, 
 
     try {
       setLoading(true);
-      const warnaResponse = await axios.get<ApiResponse<WarnaData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/refwarnastatuspembayaran`);
+      const warnaResponse = await axios.get<ApiResponse<WarnaData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/refwarnastatuspembayaran`, {
+        withCredentials: true,
+      });
       const warnaMap: Record<number, string> = {}; // Map id dengan WARNA
 
       warnaResponse.data.data.forEach((item: WarnaData) => {
@@ -83,9 +85,15 @@ const SelectPetaTematik: React.FC<SelectPetaTematikProps> = ({ selectedTematik, 
     try {
       setLoading(true);
       const [datOpBumiResponse, batasPersilResponse, warnaResponse] = await Promise.all([
-        axios.get<ApiResponse<DatOpBumiData>>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/datopbumi`),
-        axios.get<ApiResponse<PersilData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataspersil`),
-        axios.get<ApiResponse<WarnaData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/refwarnastatuspendaftaran`),
+        axios.get<ApiResponse<DatOpBumiData>>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/datopbumi`, {
+          withCredentials: true,
+        }),
+        axios.get<ApiResponse<PersilData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataspersil`, {
+          withCredentials: true,
+        }),
+        axios.get<ApiResponse<WarnaData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/refwarnastatuspendaftaran`, {
+          withCredentials: true,
+        }),
       ]);
       const datOpBumiData = datOpBumiResponse.data.data;
       const batasPersilData = batasPersilResponse.data.data;
@@ -139,7 +147,9 @@ const SelectPetaTematik: React.FC<SelectPetaTematikProps> = ({ selectedTematik, 
   const handleZNTData = async (zntData: ZNTData[]) => {
     try {
       setLoading(true);
-      const warnaResponse = await axios.get<ApiResponse<WarnaData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/refwarnaznt`);
+      const warnaResponse = await axios.get<ApiResponse<WarnaData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/refwarnaznt`, {
+        withCredentials: true,
+      });
       const warnaMap: Record<string, string> = {}; // Map STATUS dengan WARNA
 
       warnaResponse.data.data.forEach((item: WarnaData) => {
@@ -176,7 +186,9 @@ const SelectPetaTematik: React.FC<SelectPetaTematikProps> = ({ selectedTematik, 
   const handleSebaranZNTData = async (sebaranZNTData: SebaranZNTData[]) => {
     try {
       setLoading(true);
-      const warnaResponse = await axios.get<ApiResponse<WarnaData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/refwarnaznt`);
+      const warnaResponse = await axios.get<ApiResponse<WarnaData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/refwarnaznt`, {
+        withCredentials: true,
+      });
       const warnaMap: Record<string, string> = {}; // Map STATUS dengan WARNA
 
       warnaResponse.data.data.forEach((item: WarnaData) => {

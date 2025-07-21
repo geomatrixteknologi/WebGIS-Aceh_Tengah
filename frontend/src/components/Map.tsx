@@ -12,12 +12,13 @@ import L from "leaflet";
 import { getPolygonCenter } from "@/utility/GetPolygonCenter";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 
-import { ApiResponse, GeomData, WarnaKelData } from "@/utility/Interfaces";
+import { ApiResponse, GeomData, logged, WarnaKelData } from "@/utility/Interfaces";
 import { defaultGeoJsonStyle, defaultGeoJsonStyleBlok, defaultGeoJsonStyleKelurahan } from "@/utility/GeoJSONStyles";
 import { Backdrop, Box, CircularProgress } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Maps = ({
   onChangeTematik,
@@ -59,17 +60,33 @@ const Maps = ({
   });
   const [fotoPersil, setFotoPersil] = useState<string[] | null>(null);
   const [dataTitik, setDataTitik] = useState<any>([]);
+  const router = useRouter();
 
   // const [geoKelurahan, setGeoKelurahan] = useState<any>([]);
   // const [geoBlok, setGeoBlok] = useState<any>([]);
   // const [clusteredData, setClusteredData] = useState<any>({});
 
   useEffect(() => {
+    axios
+      .get<logged>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/auth/me`, { withCredentials: true })
+      .then((res) => {
+        if (res.status === 200) {
+          return;
+        } else {
+          router.push("/login");
+        }
+      })
+      .catch(() => router.push("/login"));
+  }, [router]);
+
+  useEffect(() => {
     // Fetch data kelurahan dari API
     const fetchDataKel = async () => {
       try {
         setLoading(true);
-        const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataskelurahan`);
+        const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataskelurahan`, {
+          withCredentials: true,
+        });
         setGeoJsonDataKelurahan({
           type: "FeatureCollection",
           features: response.data.data,
@@ -94,7 +111,9 @@ const Maps = ({
     const fetchDataBlok = async () => {
       try {
         setLoading(true);
-        const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/batasblok`);
+        const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/batasblok`, {
+          withCredentials: true,
+        });
         setGeoJsonDataBlok({
           type: "FeatureCollection",
           features: response.data.data,
@@ -119,7 +138,9 @@ const Maps = ({
     const fetchDataPersil = async () => {
       try {
         setLoading(true);
-        const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataspersil`);
+        const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataspersil`, {
+          withCredentials: true,
+        });
         setGeoJsonDataPersil({
           type: "FeatureCollection",
           features: response.data.data,
@@ -144,7 +165,9 @@ const Maps = ({
     const fetchDataZNT = async () => {
       try {
         setLoading(true);
-        const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/batasznt`);
+        const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/batasznt`, {
+          withCredentials: true,
+        });
         setGeoJsonDataZNT({
           type: "FeatureCollection",
           features: response.data.data,
@@ -179,7 +202,9 @@ const Maps = ({
     const fetchWarnaKel = async () => {
       try {
         setLoading(true);
-        const warnaKelResponse = await axios.get<ApiResponse<WarnaKelData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/refwarnakelurahan`);
+        const warnaKelResponse = await axios.get<ApiResponse<WarnaKelData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/refwarnakelurahan`, {
+          withCredentials: true,
+        });
         const warnaMap: Record<string, string> = {}; // Map ID to WARNA
         const newStylesPersil: Record<string, { color: string; weight: number; opacity: number; fillColor: string; fillOpacity: number }> = {};
         const newStylesKel: Record<string, { color: string; weight: number; opacity: number; fillColor: string; fillOpacity: number }> = {};
@@ -255,7 +280,9 @@ const Maps = ({
       }
       try {
         setLoading(true);
-        const fotoResponse = await axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/fotopersil/${NOP}`);
+        const fotoResponse = await axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/fotopersil/${NOP}`, {
+          withCredentials: true,
+        });
         setFotoPersil(fotoResponse.data.imageUrls);
       } catch (error: any) {
         toast.error(error.response?.data?.message || "NOP tidak Valid");
@@ -407,7 +434,9 @@ const Maps = ({
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await axios.get<any>(`${process.env.NEXT_PUBLIC_PENDATAAN_API_URL}/api/get/gettitikpendataan`); // sesuaikan endpoint
+        const res = await axios.get<any>(`${process.env.NEXT_PUBLIC_PENDATAAN_API_URL}/api/get/gettitikpendataan`, {
+          withCredentials: true,
+        }); // sesuaikan endpoint
         setDataTitik(res.data.data);
       } catch (err) {
         console.error("Gagal mengambil data titik pendataan:", err);

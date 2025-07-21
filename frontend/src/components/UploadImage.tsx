@@ -203,7 +203,9 @@ const DrawerListItemImage = ({ title, useIcon }: { title: string; useIcon: React
 
       try {
         // Cek apakah file dengan nama tersebut sudah ada
-        const checkRes = await axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/checkfotopersil/${filenameNoExt}`);
+        const checkRes = await axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/checkfotopersil/${filenameNoExt}`, {
+          withCredentials: true,
+        });
         const fileExists = checkRes.data.exists;
 
         const formData = new FormData();
@@ -211,7 +213,7 @@ const DrawerListItemImage = ({ title, useIcon }: { title: string; useIcon: React
 
         const url = fileExists ? `${process.env.NEXT_PUBLIC_GIS_API_URL}/api/upload/fotopersil/${nopRaw}?forceName=${filenameNoExt}` : `${process.env.NEXT_PUBLIC_GIS_API_URL}/api/upload/fotopersil/${nopRaw}?count=${countNop}`;
 
-        await axios.post(url, formData, { headers: { "Content-Type": "multipart/form-data" } });
+        await axios.post(url, formData, { headers: { "Content-Type": "multipart/form-data" }, withCredentials: true });
 
         toast.success(`Berhasil upload ${file.name}`);
       } catch (error: any) {

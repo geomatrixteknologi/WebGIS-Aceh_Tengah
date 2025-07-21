@@ -55,7 +55,9 @@ const ModalSearchName: React.FC<ModalSearchNameProps> = ({ open, onClose, setSea
 
   const fetchData = async (page: number, limit: number, namaWp: string) => {
     try {
-      const res = await axios.get<any>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/carinama?namawp=${namaWp}&page=${page + 1}&limit=${limit}`);
+      const res = await axios.get<any>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/carinama?namawp=${namaWp}&page=${page + 1}&limit=${limit}`, {
+        withCredentials: true,
+      });
       setData(res.data.data);
       setTotalRows(res.data.pagination.totalData);
       console.log(res.data);
@@ -81,8 +83,12 @@ const ModalSearchName: React.FC<ModalSearchNameProps> = ({ open, onClose, setSea
     }
     try {
       // panggil api get batas persil dari NOP
-      const response = await axios.get<ApiResponse<PersilData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataspersilbyNOP?nop=${nop.replace(/\./g, "")}`);
-      const fotoResponse = await axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/fotopersil/${nop.replace(/\./g, "")}`);
+      const response = await axios.get<ApiResponse<PersilData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataspersilbyNOP?nop=${nop.replace(/\./g, "")}`, {
+        withCredentials: true,
+      });
+      const fotoResponse = await axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/fotopersil/${nop.replace(/\./g, "")}`, {
+        withCredentials: true,
+      });
 
       const data = response.data.data;
       const NOP = `${data.KD_PROV}${data.KD_KAB}${data.KD_KEC}${data.KD_KEL}${data.KD_BLOK}${data.NO_URUT}${data.KD_JNS_OP}`;

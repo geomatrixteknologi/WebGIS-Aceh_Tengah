@@ -80,8 +80,12 @@ const Navbar = ({ setSearchedPolygon, setSearchedNOPZoom, drawerOpen, setDrawerO
     }
     try {
       // panggil api get batas persil dari NOP
-      const response = await axios.get<ApiResponse<PersilData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataspersilbyNOP?nop=${nop.replace(/\./g, "")}`);
-      const fotoResponse = await axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/fotopersil/${nop.replace(/\./g, "")}`);
+      const response = await axios.get<ApiResponse<PersilData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataspersilbyNOP?nop=${nop.replace(/\./g, "")}`, {
+        withCredentials: true,
+      });
+      const fotoResponse = await axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/fotopersil/${nop.replace(/\./g, "")}`, {
+        withCredentials: true,
+      });
 
       const data = response.data.data;
       const NOP = `${data.KD_PROV}${data.KD_KAB}${data.KD_KEC}${data.KD_KEL}${data.KD_BLOK}${data.NO_URUT}${data.KD_JNS_OP}`;

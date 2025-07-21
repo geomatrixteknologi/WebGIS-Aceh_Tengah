@@ -50,6 +50,7 @@ const UploadButton: React.FC<UploadButtonProps> = ({ label, endpoint, jenis, kec
         headers: {
           "Content-Type": "multipart/form-data",
         },
+        withCredentials: true,
       });
 
       if (response.status === 200) {

@@ -22,7 +22,9 @@ const LegendaTematik: React.FC<LegendaTematikProps> = ({ selectedTematik, warnaD
     const fetchDataZNT = async () => {
       try {
         // get batas znt by kec kel tahun
-        const response = await axios.get<ApiResponse<ZNTData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataszntbykeckeltahun?kdkec=${kdKecZNT}&kdkel=${kdKelZNT}&tahun=${tahunZNT}`);
+        const response = await axios.get<ApiResponse<ZNTData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataszntbykeckeltahun?kdkec=${kdKecZNT}&kdkel=${kdKelZNT}&tahun=${tahunZNT}`, {
+          withCredentials: true,
+        });
         const batasZNTData = response.data.data;
 
         const updatedWarnaData = batasZNTData

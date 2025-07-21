@@ -31,7 +31,7 @@ const RegisterButton = () => {
   // Fetch daftar role dari API
   useEffect(() => {
     axios
-      .get<RoleDataAPI>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/auth/role`)
+      .get<RoleDataAPI>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/auth/role`, { withCredentials: true })
       .then((res) => {
         if (res.data.code === 200 && Array.isArray(res.data.data)) {
           setRoles(res.data.data); // Set daftar role berdasarkan response API
@@ -44,7 +44,7 @@ const RegisterButton = () => {
   const handleRegister = async () => {
     setLoading(true);
     try {
-      const res = await axios.post<register>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/auth/register`, { username, password, role });
+      const res = await axios.post<register>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/auth/register`, { username, password, role }, { withCredentials: true });
       toast.success(res.data.message || "Akun berhasil dibuat!");
       setOpen(false); // Tutup modal setelah sukses
       setUsername("");

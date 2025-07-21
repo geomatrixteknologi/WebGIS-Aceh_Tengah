@@ -38,7 +38,7 @@ const LandDrawer: React.FC<LandDrawerProps> = ({ open, onClose, searchNop, geomD
 
     setLoading(true);
     axios
-      .get<ApiResponse<LandData>>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/detailnop?nop=${searchNop}`)
+      .get<ApiResponse<LandData>>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/detailnop?nop=${searchNop}`, { withCredentials: true })
       .then((response) => {
         setLandData(response.data.data);
       })
