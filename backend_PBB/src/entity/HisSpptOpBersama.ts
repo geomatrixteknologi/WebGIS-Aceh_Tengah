@@ -2,7 +2,7 @@ import { Column, Entity, Index } from "typeorm";
 
 @Index("his_sppt_op_bersama_pkey", ["hisIndeksPerubahanSppt", "kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "thnPajakSppt"], { unique: true })
 @Index("x2_1_ak", ["hisIndeksPerubahanSppt", "kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "thnPajakSppt"], { unique: true })
-@Entity("his_sppt_op_bersama", { schema: "public" })
+@Entity("his_sppt_op_bersama")
 export class HisSpptOpBersama {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

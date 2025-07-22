@@ -5,7 +5,7 @@ import { DayaDukung } from "./DayaDukung";
 @Index("c35_1_ak", ["kdDati2", "kdPropinsi", "thnDbkbDayaDukung", "typeKonstruksi"], { unique: true })
 @Index("dbkb_daya_dukung_pkey", ["kdDati2", "kdPropinsi", "thnDbkbDayaDukung", "typeKonstruksi"], { unique: true })
 @Index("c35_2_ak", ["kdDati2", "kdPropinsi", "thnDbkbDayaDukung", "typeKonstruksi"], { unique: true })
-@Entity("dbkb_daya_dukung", { schema: "public" })
+@Entity("dbkb_daya_dukung")
 export class DbkbDayaDukung {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

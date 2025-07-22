@@ -4,7 +4,7 @@ import { Column, Entity, Index } from "typeorm";
   unique: true,
 })
 @Index("listrik_rek_listrik_fk", ["noPelangganPln"], {})
-@Entity("rek_listrik", { schema: "public" })
+@Entity("rek_listrik")
 export class RekListrik {
   @Column("character", { primary: true, name: "no_pelanggan_pln", length: 12 })
   noPelangganPln!: string;

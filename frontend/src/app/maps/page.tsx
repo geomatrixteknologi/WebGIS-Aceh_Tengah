@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import LegendaTematik from "@/components/LegendaTematik";
 import Navbar from "@/components/Navbar";
@@ -21,6 +22,9 @@ export default function MapsPage() {
   const [kdKecZNT, setKdKecZNT] = useState<string>("");
   const [kdKelZNT, setKdKelZNT] = useState<string>("");
   const [tahunZNT, setTahunZNT] = useState<string>("");
+  const [latitudeCP, setLatitudeCP] = useState<number>(0);
+  const [longitudeCP, setLongitudeCP] = useState<number>(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     axios
@@ -30,6 +34,13 @@ export default function MapsPage() {
       })
       .catch(() => router.push("/login"));
   }, [router]);
+
+  useEffect(() => {
+    axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/centerpoint`, { withCredentials: true }).then((res) => {
+      setLatitudeCP(res.data.data.LATITUDE);
+      setLongitudeCP(res.data.data.LONGITUDE);
+    });
+  }, []);
 
   const Map = useMemo(
     () =>
@@ -48,7 +59,17 @@ export default function MapsPage() {
   return (
     <>
       <div>
-        <Navbar setSearchedPolygon={setSearchedPolygon} setSearchedNOPZoom={setSearchedNOPZoom} drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} onClose={handleResetPolygon} />
+        <Navbar
+          setSearchedPolygon={setSearchedPolygon}
+          setSearchedNOPZoom={setSearchedNOPZoom}
+          drawerOpen={drawerOpen}
+          setDrawerOpen={setDrawerOpen}
+          onClose={handleResetPolygon}
+          latitudeCP={latitudeCP}
+          setLatitudeCP={setLatitudeCP}
+          longitudeCP={longitudeCP}
+          setLongitudeCP={setLongitudeCP}
+        />
         <SelectPetaTematik
           selectedTematik={selectedTematik}
           setSelectedTematik={setSelectedTematik}
@@ -58,9 +79,21 @@ export default function MapsPage() {
           setKdKecZNT={setKdKecZNT}
           setKdKelZNT={setKdKelZNT}
           setTahunZNT={setTahunZNT}
+          setLoading={setLoading}
         />
         <LegendaTematik selectedTematik={selectedTematik} warnaData={warnaData} kdKecZNT={kdKecZNT} kdKelZNT={kdKelZNT} tahunZNT={tahunZNT} />
-        <Map onChangeTematik={onChangeTematik} selectedTematik={selectedTematik} isZNT={isZNT} setIsZNT={setIsZNT} searchedNOP={searchedNOP} searchedPolygon={searchedPolygon} />
+        <Map
+          onChangeTematik={onChangeTematik}
+          selectedTematik={selectedTematik}
+          isZNT={isZNT}
+          setIsZNT={setIsZNT}
+          searchedNOP={searchedNOP}
+          searchedPolygon={searchedPolygon}
+          latitudeCP={latitudeCP}
+          longitudeCP={longitudeCP}
+          loading={loading}
+          setLoading={setLoading}
+        />
         <Toaster position="top-center" />
       </div>
     </>

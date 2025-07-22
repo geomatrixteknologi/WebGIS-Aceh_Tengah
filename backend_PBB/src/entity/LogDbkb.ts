@@ -3,7 +3,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("log_dbkb_pkey", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi"], { unique: true })
 @Index("l1_1_ak", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi", "nipPerekamLogDbkb"], { unique: true })
 @Index("l1_2_ak", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi", "statusLogDbkb"], { unique: true })
-@Entity("log_dbkb", { schema: "public" })
+@Entity("log_dbkb")
 export class LogDbkb {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

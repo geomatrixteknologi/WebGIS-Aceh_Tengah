@@ -3,7 +3,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("pbb_minimal_pkey", ["kdDati2", "kdPropinsi", "thnPbbMinimal"], {
   unique: true,
 })
-@Entity("pbb_minimal", { schema: "public" })
+@Entity("pbb_minimal")
 export class PbbMinimal {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

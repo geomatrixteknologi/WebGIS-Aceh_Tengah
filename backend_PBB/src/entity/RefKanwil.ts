@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("ref_kanwil_pkey", ["kdKanwil"], { unique: true })
-@Entity("ref_kanwil", { schema: "public" })
+@Entity("ref_kanwil")
 export class RefKanwil {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

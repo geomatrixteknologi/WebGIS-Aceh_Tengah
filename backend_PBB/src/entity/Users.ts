@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("users_pkey", ["username"], { unique: true })
-@Entity("users", { schema: "public" })
+@Entity("users")
 export class Users {
   @Column("character varying", { primary: true, name: "username", length: 10 })
   username!: string;

@@ -88,7 +88,7 @@ import { Column, Entity, Index } from "typeorm";
   ],
   { unique: true }
 )
-@Entity("berkas_terima", { schema: "public" })
+@Entity("berkas_terima")
 export class BerkasTerima {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

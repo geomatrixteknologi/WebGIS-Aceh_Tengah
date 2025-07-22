@@ -9,7 +9,7 @@ import { Column, Entity, Index } from "typeorm";
   { unique: true }
 )
 @Index("i2_l6_fk", ["jnsSk", "kdKantor", "kdKanwil", "noSk"], {})
-@Entity("pengurangan_permanen", { schema: "public" })
+@Entity("pengurangan_permanen")
 export class PenguranganPermanen {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

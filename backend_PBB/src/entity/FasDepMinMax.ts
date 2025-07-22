@@ -4,7 +4,7 @@ import { RefDati2 } from "./RefDati2";
 
 @Index("fas_dep_min_max_pkey", ["kdDati2", "kdFasilitas", "kdPropinsi", "klsDepMax", "klsDepMin", "thnDepMinMax"], { unique: true })
 @Index("c26_3_ak", ["kdDati2", "kdFasilitas", "kdPropinsi", "klsDepMax", "klsDepMin", "thnDepMinMax"], { unique: true })
-@Entity("fas_dep_min_max", { schema: "public" })
+@Entity("fas_dep_min_max")
 export class FasDepMinMax {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

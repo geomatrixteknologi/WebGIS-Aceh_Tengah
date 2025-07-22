@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("ref_umum_pkey", ["kdRef"], { unique: true })
-@Entity("ref_umum", { schema: "public" })
+@Entity("ref_umum")
 export class RefUmum {
   @Column("bigint", { primary: true, name: "kd_ref" })
   kdRef!: string;

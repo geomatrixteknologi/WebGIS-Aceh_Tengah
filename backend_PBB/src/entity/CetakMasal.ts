@@ -4,7 +4,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("e22_1_ak", ["indeksCetakMasal", "kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi", "nipPencetakMasal", "thnCetakMasal"], { unique: true })
 @Index("e22_2_ak", ["indeksCetakMasal", "kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi", "tglCetakMasal", "thnCetakMasal"], { unique: true })
 @Index("e22_e21_fk", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi"], {})
-@Entity("cetak_masal", { schema: "public" })
+@Entity("cetak_masal")
 export class CetakMasal {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

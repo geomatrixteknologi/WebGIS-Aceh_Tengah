@@ -2,7 +2,7 @@ import { Column, Entity, Index } from "typeorm";
 
 @Index("temp_max_bundel_pkey", ["kdKantor", "kdKanwil", "tempNoBundel", "tempThnBundel", "tempUrutBundel"], { unique: true })
 @Index("t3_a6_fk", ["kdKantor", "kdKanwil"], {})
-@Entity("temp_max_bundel", { schema: "public" })
+@Entity("temp_max_bundel")
 export class TempMaxBundel {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

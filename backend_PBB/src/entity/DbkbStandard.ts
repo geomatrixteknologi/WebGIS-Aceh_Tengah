@@ -4,7 +4,7 @@ import { RefDati2 } from "./RefDati2";
 @Index("c3_2_ak", ["kdBngLantai", "kdDati2", "kdJpb", "kdPropinsi", "thnDbkbStandard", "tipeBng"], { unique: true })
 @Index("c3_1_ak", ["kdBngLantai", "kdDati2", "kdJpb", "kdPropinsi", "thnDbkbStandard", "tipeBng"], { unique: true })
 @Index("dbkb_standard_pkey", ["kdBngLantai", "kdDati2", "kdJpb", "kdPropinsi", "thnDbkbStandard", "tipeBng"], { unique: true })
-@Entity("dbkb_standard", { schema: "public" })
+@Entity("dbkb_standard")
 export class DbkbStandard {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

@@ -1,6 +1,6 @@
 import { Column, Entity } from "typeorm";
 
-@Entity("his_pemakai", { schema: "public" })
+@Entity("his_pemakai")
 export class HisPemakai {
   @Column("character", { name: "username", length: 10 })
   username!: string;

@@ -1,6 +1,6 @@
 import { Column, Entity } from "typeorm";
 
-@Entity("setting_apps", { schema: "public" })
+@Entity("setting_apps")
 export class SettingApps {
   @Column("numeric", { name: "id", nullable: true, precision: 38, scale: 0 })
   id!: string | null;

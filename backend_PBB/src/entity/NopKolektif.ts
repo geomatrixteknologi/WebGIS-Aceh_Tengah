@@ -2,7 +2,7 @@ import { Column, Entity, Index, OneToMany } from "typeorm";
 import { NopKolektifPiutang } from "./NopKolektifPiutang";
 
 @Index("nop_kolektif_pkey", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "thnPembentukan"], { unique: true })
-@Entity("nop_kolektif", { schema: "public" })
+@Entity("nop_kolektif")
 export class NopKolektif {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

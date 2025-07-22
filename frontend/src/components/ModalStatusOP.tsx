@@ -35,13 +35,17 @@ const ModalStatusOP: React.FC<ModalStatusOPProps> = ({ onFetchData, onClose, sel
     const fetchOptions = async () => {
       try {
         // Fetch data kecamatan dari backend
-        const response1 = await axios.get<ApiResponse<Kecamatan>>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/kodekecamatan`);
+        const response1 = await axios.get<ApiResponse<Kecamatan>>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/kodekecamatan`, {
+          withCredentials: true,
+        });
         const kecamatanData = response1.data.data.map((item) => `${item.kdKecamatan} - ${item.nmKecamatan}`);
 
         setOptions1(kecamatanData);
 
         // Fetch data kelurahan dari backend
-        const response2 = await axios.get<ApiResponse<Kelurahan>>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/kodekelurahan`);
+        const response2 = await axios.get<ApiResponse<Kelurahan>>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/kodekelurahan`, {
+          withCredentials: true,
+        });
         const kelurahanData = response2.data.data;
 
         setOptions2(kelurahanData);
@@ -85,7 +89,9 @@ const ModalStatusOP: React.FC<ModalStatusOPProps> = ({ onFetchData, onClose, sel
     try {
       let response;
       if (selectedModal === "Status Pembayaran") {
-        response = await axios.get<ApiResponse<SpptData>>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/spptbytahun?tahun=${tahun}`);
+        response = await axios.get<ApiResponse<SpptData>>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/spptbytahun?tahun=${tahun}`, {
+          withCredentials: true,
+        });
       } else if (selectedModal === "Peta ZNT" && setKdKecZNT && setKdKelZNT && setTahunZNT) {
         // get kode kecamatan from inputValue1
         const kdkec = inputValue1.split(" - ")[0];
@@ -96,7 +102,9 @@ const ModalStatusOP: React.FC<ModalStatusOPProps> = ({ onFetchData, onClose, sel
         setKdKelZNT(kdkel);
         setTahunZNT(tahun);
 
-        response = await axios.get<ApiResponse<ZNTData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataszntbykeckeltahun?kdkec=${kdkec}&kdkel=${kdkel}&tahun=${tahun}`);
+        response = await axios.get<ApiResponse<ZNTData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataszntbykeckeltahun?kdkec=${kdkec}&kdkel=${kdkel}&tahun=${tahun}`, {
+          withCredentials: true,
+        });
       } else if (selectedModal === "Sebaran ZNT" && setKdKecZNT && setKdKelZNT && setTahunZNT) {
         const kdkec = inputValue1.split(" - ")[0];
         const kdkel = inputValue2.split(" - ")[0];
@@ -105,7 +113,9 @@ const ModalStatusOP: React.FC<ModalStatusOPProps> = ({ onFetchData, onClose, sel
         setKdKelZNT(kdkel);
         setTahunZNT(tahun);
 
-        response = await axios.get<ApiResponse<SebaranZNTData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/sebaranznt?kdkec=${kdkec}&kdkel=${kdkel}&tahun=${tahun}`);
+        response = await axios.get<ApiResponse<SebaranZNTData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/sebaranznt?kdkec=${kdkec}&kdkel=${kdkel}&tahun=${tahun}`, {
+          withCredentials: true,
+        });
       }
       if (response) {
         onFetchData({ data: response.data.data, selectedModal });

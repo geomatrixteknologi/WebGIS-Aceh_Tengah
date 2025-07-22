@@ -3,7 +3,7 @@ import { DatOpBangunan } from "./DatOpBangunan";
 import { DayaDukung } from "./DayaDukung";
 
 @Index("dat_jpb8_pkey", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noBng", "noUrut"], { unique: true })
-@Entity("dat_jpb8", { schema: "public" })
+@Entity("dat_jpb8")
 export class DatJpb8 {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

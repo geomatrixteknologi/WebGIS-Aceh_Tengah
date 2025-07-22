@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("vol_kegiatan_jpb8_pkey", ["kdKegiatan", "kdPekerjaan", "lbrBentMaxHrgJpb8", "lbrBentMinHrgJpb8", "tingKolomMaxHrgJpb8", "tingKolomMinHrgJpb8"], { unique: true })
-@Entity("vol_kegiatan_jpb8", { schema: "public" })
+@Entity("vol_kegiatan_jpb8")
 export class VolKegiatanJpb8 {
   @Column("character", { primary: true, name: "kd_pekerjaan", length: 2 })
   kdPekerjaan!: string;

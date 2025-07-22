@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("sim_dbkb_jpb16_pkey", ["kdDati2", "kdPropinsi", "simKlsDbkbJpb16", "simLantaiMaxJpb16", "simLantaiMinJpb16", "simThnDbkbJpb16"], { unique: true })
-@Entity("sim_dbkb_jpb16", { schema: "public" })
+@Entity("sim_dbkb_jpb16")
 export class SimDbkbJpb16 {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

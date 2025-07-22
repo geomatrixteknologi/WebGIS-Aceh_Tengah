@@ -60,7 +60,7 @@ import { Column, Entity, Index } from "typeorm";
   ],
   {}
 )
-@Entity("penerima_kompensasi", { schema: "public" })
+@Entity("penerima_kompensasi")
 export class PenerimaKompensasi {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

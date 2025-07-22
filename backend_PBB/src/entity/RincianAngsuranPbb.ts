@@ -3,7 +3,7 @@ import { KeputusanAngsuranPbb } from "./KeputusanAngsuranPbb";
 import { Pegawai } from "./Pegawai";
 
 @Index("rincian_angsuran_pbb_pkey", ["angsuranKe", "kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "thnPajakSppt"], { unique: true })
-@Entity("rincian_angsuran_pbb", { schema: "public" })
+@Entity("rincian_angsuran_pbb")
 export class RincianAngsuranPbb {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

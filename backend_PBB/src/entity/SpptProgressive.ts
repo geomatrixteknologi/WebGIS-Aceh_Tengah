@@ -1,6 +1,6 @@
 import { Column, Entity } from "typeorm";
 
-@Entity("sppt_progressive", { schema: "public" })
+@Entity("sppt_progressive")
 export class SpptProgressive {
   @Column("character", { name: "nop", nullable: true, length: 18 })
   nop!: string | null;

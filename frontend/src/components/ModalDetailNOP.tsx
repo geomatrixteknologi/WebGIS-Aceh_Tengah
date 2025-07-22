@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Typography, Box, CircularProgress, Card, CardContent, Slide, Fade, IconButton, SvgIcon, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper } from "@mui/material";
+import { Typography, Box, CircularProgress, Card, CardContent, Slide, Fade, IconButton, SvgIcon, TableContainer, Table, TableRow, TableCell, TableBody, Paper } from "@mui/material";
 import axios from "axios";
 import { formatRupiah } from "@/utility/FormatRupiah";
 import toast from "react-hot-toast";
@@ -38,7 +38,7 @@ const LandDrawer: React.FC<LandDrawerProps> = ({ open, onClose, searchNop, geomD
 
     setLoading(true);
     axios
-      .get<ApiResponse<LandData>>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/detailnop?nop=${searchNop}`)
+      .get<ApiResponse<LandData>>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/detailnop?nop=${searchNop}`, { withCredentials: true })
       .then((response) => {
         setLandData(response.data.data);
       })
@@ -83,62 +83,79 @@ const LandDrawer: React.FC<LandDrawerProps> = ({ open, onClose, searchNop, geomD
             <Card
               sx={{
                 width: "100%",
-                maxWidth: { xs: 300, sm: 350, md: 400 },
-                height: "100%",
-                maxHeight: "80vh",
+                maxWidth: { xs: "90vw", sm: 300, md: 400 },
+                height: "auto",
+                maxHeight: { xs: "95vh", md: "85vh" },
                 borderRadius: 4,
                 boxShadow: 3,
+                overflow: "hidden",
               }}
             >
-              <CardContent>
-                <Box display={"flex"} justifyContent="space-between" alignItems="center">
-                  <Typography variant="h6">Informasi Objek Pajak</Typography>
+              <CardContent
+                sx={{
+                  p: 2,
+                  // overflowY: "auto",
+                  maxHeight: { xs: "70vh", md: "85vh" }, // scrollable di mobile
+                }}
+              >
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+                  <Typography variant="h6" fontSize={{ xs: "1rem", sm: "1.25rem" }}>
+                    Informasi Objek Pajak
+                  </Typography>
                   <IconButton
                     onClick={onClose}
                     sx={{
                       bgcolor: "#FFC107",
-                      color: "#FFF", // Warna teks agar kontras
+                      color: "#FFF",
                       "&:hover": {
                         bgcolor: "#e73d3d",
-                        color: "##FFF", // Warna saat hover
+                        color: "#FFF",
                       },
                     }}
                   >
                     <CancelIcon />
                   </IconButton>
                 </Box>
+
                 {loading ? (
                   <CircularProgress sx={{ display: "block", margin: "20px auto" }} />
                 ) : landData ? (
-                  <Box sx={{ mt: 2, maxHeight: "70vh" }}>
-                    {fotoPersil && fotoPersil.length != 0 ? (
-                      <Swiper pagination={{ clickable: true }} navigation={true} modules={[Navigation, Pagination]} spaceBetween={10} slidesPerView={1}>
-                        <Box sx={{ width: "100%", maxHeight: 250, position: "relative", borderRadius: 2, overflow: "hidden" }}>
-                          {fotoPersil.map((url, index) => (
-                            <SwiperSlide key={index}>
-                              <Box sx={{ width: "100%", height: "100%", position: "relative" }}>
-                                <Image
-                                  src={url}
-                                  alt={`Foto Persil ${index + 1}`}
-                                  width={300}
-                                  height={200}
-                                  quality={70}
-                                  style={{
-                                    objectFit: "cover",
-                                  }}
-                                />
-                              </Box>
-                            </SwiperSlide>
-                          ))}
-                        </Box>
+                  <Box sx={{ mt: 2 }}>
+                    {fotoPersil?.length ? (
+                      <Swiper pagination={{ clickable: true }} navigation={true} modules={[Navigation, Pagination]} spaceBetween={10} slidesPerView={1} style={{ borderRadius: 12 }}>
+                        {fotoPersil.map((url, index) => (
+                          <SwiperSlide key={index}>
+                            <Box
+                              sx={{
+                                width: "100%",
+                                height: { xs: 180, sm: 220, md: 250 },
+                                position: "relative",
+                                borderRadius: 2,
+                                overflow: "hidden",
+                              }}
+                            >
+                              <Image src={url} alt={`Foto Persil ${index + 1}`} fill style={{ objectFit: "cover" }} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+                            </Box>
+                          </SwiperSlide>
+                        ))}
                       </Swiper>
                     ) : (
-                      <Box sx={{ justifyItems: "center" }}>
-                        <Image src="/placeholder.png" alt="No Image Available" width={0} height={0} sizes="100vw" style={{ objectFit: "cover", borderRadius: "10px", width: "80%" }} />
+                      <Box display="flex" justifyContent="center" mt={2}>
+                        <Image
+                          src="/placeholder.png"
+                          alt="No Image Available"
+                          width={280}
+                          height={200}
+                          style={{
+                            objectFit: "cover",
+                            borderRadius: "10px",
+                          }}
+                        />
                       </Box>
                     )}
-                    <Box display="flex" justifyContent="center" alignItems="center">
-                      <SvgIcon onClick={openStreetView} sx={{ fontSize: { xs: "1.5rem", sm: "2rem", md: "3rem" } }}>
+
+                    <Box display="flex" justifyContent="center" mt={2}>
+                      <SvgIcon onClick={openStreetView} sx={{ fontSize: { xs: 32, sm: 40, md: 48 }, cursor: "pointer" }}>
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
                           <path fill="#43a047" d="M39.25,8.25l-12,12L8.1,39.4c-0.36-0.4-0.69-0.83-0.96-1.3C6.41,36.9,6,35.5,6,34V14	c0-4.42,3.58-8,8-8h19.5c1.64,0,3.17,0.47,4.47,1.27C38.43,7.56,38.86,7.88,39.25,8.25z"></path>
                           <path fill="#cfd8dc" d="M42,14.5V34c0,4.42-3.58,8-8,8H14c-1.64,0-3.16-0.49-4.42-1.34c-0.54-0.35-1.04-0.78-1.48-1.26	l19.15-19.15l12-12c0.48,0.44,0.91,0.93,1.27,1.47C41.46,11.08,42,12.73,42,14.5z"></path>
@@ -157,65 +174,57 @@ const LandDrawer: React.FC<LandDrawerProps> = ({ open, onClose, searchNop, geomD
                       </SvgIcon>
                     </Box>
 
-                    <TableContainer component={Paper} sx={{ maxHeight: "25vh", minWidth: "fit-content", overflow: "auto" }}>
+                    <TableContainer
+                      component={Paper}
+                      sx={{
+                        maxHeight: { xs: "30vh", sm: "35vh" },
+                        mt: 2,
+                        overflow: "auto",
+                      }}
+                    >
                       <Table stickyHeader>
-                        <TableHead>
-                          {/* <TableRow>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
-                          </TableRow> */}
-                        </TableHead>
                         <TableBody>
                           <TableRow>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "normal" }}>Nomor Objek Pajak</TableCell>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "wrap" }}>
-                              <Typography
-                                variant="body2"
-                                sx={{
-                                  wordWrap: "break-word",
-                                  whiteSpace: "normal",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  maxWidth: "30vw", // Sesuaikan ukuran maksimal kolom
-                                }}
-                              >
+                            <TableCell>Nomor Objek Pajak</TableCell>
+                            <TableCell>
+                              <Typography variant="body2" sx={{ wordBreak: "break-word" }}>
                                 {landData.kdPropinsi}.{landData.kdDati2}.{landData.kdKecamatan}.{landData.kdKelurahan}.{landData.kdBlok}.{landData.noUrut}.{landData.kdJnsOp}
                               </Typography>
                             </TableCell>
                           </TableRow>
                           <TableRow>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "normal" }}>Nama Wajib Pajak</TableCell>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "normal" }}>{landData.subjekPajak.nmWp}</TableCell>
+                            <TableCell>Nama Wajib Pajak</TableCell>
+                            <TableCell>{landData.subjekPajak.nmWp}</TableCell>
                           </TableRow>
                           <TableRow>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "normal" }}>Alamat</TableCell>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "normal" }}>{landData.jalanOp}</TableCell>
+                            <TableCell>Alamat</TableCell>
+                            <TableCell>{landData.jalanOp}</TableCell>
                           </TableRow>
                           <TableRow>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "normal" }}>RT/RW</TableCell>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "normal" }}>
+                            <TableCell>RT/RW</TableCell>
+                            <TableCell>
                               {landData.rtOp} / {landData.rwOp}
                             </TableCell>
                           </TableRow>
                           <TableRow>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "normal" }}>Luas Bumi</TableCell>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "normal" }}>{formatRibuan(Number(landData.totalLuasBumi))} m²</TableCell>
+                            <TableCell>Luas Bumi</TableCell>
+                            <TableCell>{formatRibuan(Number(landData.totalLuasBumi))} m²</TableCell>
                           </TableRow>
                           <TableRow>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "normal" }}>Luas Bangunan</TableCell>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "normal" }}>{formatRibuan(Number(landData.totalLuasBng))} m²</TableCell>
+                            <TableCell>Luas Bangunan</TableCell>
+                            <TableCell>{formatRibuan(Number(landData.totalLuasBng))} m²</TableCell>
                           </TableRow>
                           <TableRow>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "normal" }}>NJOP Tanah</TableCell>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "normal" }}>{formatRupiah(landData.njopBumi)}</TableCell>
+                            <TableCell>NJOP Tanah</TableCell>
+                            <TableCell>{formatRupiah(landData.njopBumi)}</TableCell>
                           </TableRow>
                           <TableRow>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "wrap" }}>NJOP Bangunan</TableCell>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "normal" }}>{formatRupiah(landData.njopBng)}</TableCell>
+                            <TableCell>NJOP Bangunan</TableCell>
+                            <TableCell>{formatRupiah(landData.njopBng)}</TableCell>
                           </TableRow>
                           <TableRow>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "normal" }}>Kode ZNT</TableCell>
-                            <TableCell sx={{ wordWrap: "break-word", whiteSpace: "normal" }}>{landData.datOpBumis[0]?.kdZnt}</TableCell>
+                            <TableCell>Kode ZNT</TableCell>
+                            <TableCell>{landData.datOpBumis[0]?.kdZnt}</TableCell>
                           </TableRow>
                         </TableBody>
                       </Table>

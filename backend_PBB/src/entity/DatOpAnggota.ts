@@ -8,7 +8,7 @@ import { Column, Entity, Index } from "typeorm";
 })
 @Index("d10_fk2", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut"], {})
 @Index("d10_fk1", ["kdBlokInduk", "kdDati2Induk", "kdJnsOpInduk", "kdKecamatanInduk", "kdKelurahanInduk", "kdPropinsiInduk", "noUrutInduk"], {})
-@Entity("dat_op_anggota", { schema: "public" })
+@Entity("dat_op_anggota")
 export class DatOpAnggota {
   @Column("character", { primary: true, name: "kd_propinsi_induk", length: 2 })
   kdPropinsiInduk!: string;

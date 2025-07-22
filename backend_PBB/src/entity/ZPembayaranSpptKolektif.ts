@@ -1,6 +1,6 @@
 import { Column, Entity } from "typeorm";
 
-@Entity("z_pembayaran_sppt_kolektif", { schema: "public" })
+@Entity("z_pembayaran_sppt_kolektif")
 export class ZPembayaranSpptKolektif {
   @Column("character varying", { name: "kode_bayar", length: 22 })
   kodeBayar!: string;

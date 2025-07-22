@@ -8,7 +8,7 @@ import { FasNonDep } from "./FasNonDep";
 @Index("c23_1_ak", ["kdFasilitas", "ketergantungan", "statusFasilitas"], {
   unique: true,
 })
-@Entity("fasilitas", { schema: "public" })
+@Entity("fasilitas")
 export class Fasilitas {
   @Column("character", { primary: true, name: "kd_fasilitas", length: 2 })
   kdFasilitas!: string;

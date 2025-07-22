@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("tipe_bangunan_pkey", ["tipeBng"], { unique: true })
-@Entity("tipe_bangunan", { schema: "public" })
+@Entity("tipe_bangunan")
 export class TipeBangunan {
   @Column("character", { primary: true, name: "tipe_bng", length: 5 })
   tipeBng!: string;

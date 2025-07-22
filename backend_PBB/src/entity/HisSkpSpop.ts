@@ -3,7 +3,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("x3_1_ak", ["hisIndeksPerubahanSkpSpop", "kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "thnPajakSkpSpop"], { unique: true })
 @Index("his_skp_spop_pkey", ["hisIndeksPerubahanSkpSpop", "kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "thnPajakSkpSpop"], { unique: true })
 @Index("x3_l6_fk", ["jnsSk", "kdKantor", "kdKanwil", "noSk"], {})
-@Entity("his_skp_spop", { schema: "public" })
+@Entity("his_skp_spop")
 export class HisSkpSpop {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

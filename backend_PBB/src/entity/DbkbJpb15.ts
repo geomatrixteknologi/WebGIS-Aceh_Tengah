@@ -4,7 +4,7 @@ import { RefDati2 } from "./RefDati2";
 @Index("c41_1_pk", ["jnsTangkiDbkbJpb15", "kapasitasMaxDbkbJpb15", "kapasitasMinDbkbJpb15", "kdDati2", "kdPropinsi", "thnDbkbJpb15"], { unique: true })
 @Index("dbkb_jpb15_pkey", ["jnsTangkiDbkbJpb15", "kapasitasMaxDbkbJpb15", "kapasitasMinDbkbJpb15", "kdDati2", "kdPropinsi", "thnDbkbJpb15"], { unique: true })
 @Index("c41_2_pk", ["jnsTangkiDbkbJpb15", "kapasitasMaxDbkbJpb15", "kapasitasMinDbkbJpb15", "kdDati2", "kdPropinsi", "thnDbkbJpb15"], { unique: true })
-@Entity("dbkb_jpb15", { schema: "public" })
+@Entity("dbkb_jpb15")
 export class DbkbJpb15 {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

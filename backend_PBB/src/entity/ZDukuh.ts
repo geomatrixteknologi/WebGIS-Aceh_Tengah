@@ -1,6 +1,6 @@
 import { Column, Entity } from "typeorm";
 
-@Entity("z_dukuh", { schema: "public" })
+@Entity("z_dukuh")
 export class ZDukuh {
   @Column("character", { name: "kd_kecamatan", nullable: true, length: 3 })
   kdKecamatan!: string | null;

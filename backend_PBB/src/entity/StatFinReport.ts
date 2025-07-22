@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("stat_fin_report_pkey", ["kdStatFinRep"], { unique: true })
-@Entity("stat_fin_report", { schema: "public" })
+@Entity("stat_fin_report")
 export class StatFinReport {
   @Column("character", { primary: true, name: "kd_stat_fin_rep", length: 2 })
   kdStatFinRep!: string;

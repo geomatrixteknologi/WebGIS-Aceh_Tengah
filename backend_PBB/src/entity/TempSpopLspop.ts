@@ -2,7 +2,7 @@ import { Column, Entity, Index } from "typeorm";
 
 @Index("temp_spop_lspop_pkey", ["jnsTransaksiTemp", "kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "nipTransaksiTemp", "noTransaksiTemp", "noUrut"], { unique: true })
 @Index("t4_2_ak", ["jnsTransaksiTemp", "kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "nipTransaksiTemp", "noTransaksiTemp", "noUrut", "statusProses"], { unique: true })
-@Entity("temp_spop_lspop", { schema: "public" })
+@Entity("temp_spop_lspop")
 export class TempSpopLspop {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

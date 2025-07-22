@@ -10,6 +10,8 @@ import { RefWarnaZNT } from "./entity/refWarnaZNT";
 import { BatasZNT } from "./entity/batasZNT";
 import { BatasBlok } from "./entity/batasBlok";
 import { RefWarnaKelurahan } from "./entity/refWarnaKelurahan";
+import { centerPoint } from "./entity/centerPoint";
+import { zoom } from "./entity/zoom";
 
 dotenv.config();
 
@@ -28,7 +30,7 @@ export const AppDataSource = new DataSource({
   ssl: {
     rejectUnauthorized: false, // untuk sementara (non-production)
   },
-  entities: [BatasZNT, BatasKelurahan, BatasBlok, BatasPersil, RefWarnaKelurahan, RefWarnaStatusPembayaran, RefWarnaStatusPendaftaran, RefWarnaZNT, userAccount, accountRole],
+  entities: [BatasZNT, BatasKelurahan, BatasBlok, BatasPersil, RefWarnaKelurahan, RefWarnaStatusPembayaran, RefWarnaStatusPendaftaran, RefWarnaZNT, userAccount, accountRole, centerPoint, zoom],
   subscribers: [],
   migrations: [],
 });

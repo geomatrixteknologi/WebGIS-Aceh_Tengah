@@ -2,7 +2,7 @@ import { Column, Entity, Index, OneToMany } from "typeorm";
 import { PembatalanSppt } from "./PembatalanSppt";
 
 @Index("ketbatal_pkey", ["kdBatal"], { unique: true })
-@Entity("ketbatal", { schema: "public" })
+@Entity("ketbatal")
 export class Ketbatal {
   @Column("character", { primary: true, name: "kd_batal", length: 2 })
   kdBatal!: string;

@@ -24,7 +24,7 @@ interface ApiResponse<T> {
   data: T;
 }
 
-const Navbar = ({ setSearchedPolygon, setSearchedNOPZoom, drawerOpen, setDrawerOpen, onClose }: any) => {
+const Navbar = ({ setSearchedPolygon, setSearchedNOPZoom, drawerOpen, setDrawerOpen, onClose, latitudeCP, setLatitudeCP, longitudeCP, setLongitudeCP }: any) => {
   const [nop, setNop] = useState("");
   const [error, setError] = useState("");
   const [searchNop, setSearchNop] = useState("");
@@ -63,6 +63,8 @@ const Navbar = ({ setSearchedPolygon, setSearchedNOPZoom, drawerOpen, setDrawerO
 
     if (formattedNop.length === 24 && validateNop(formattedNop)) {
       setError("");
+    } else if (formattedNop.length === 0) {
+      setError("");
     } else {
       setError("Format NOP tidak valid (XX.XX.XXX.XXX.XXX.XXXX.X)");
     }
@@ -71,12 +73,19 @@ const Navbar = ({ setSearchedPolygon, setSearchedNOPZoom, drawerOpen, setDrawerO
   const handleSearch = async () => {
     if (!validateNop(nop)) {
       setError("Format NOP tidak valid.");
+      setTimeout(() => {
+        setError("");
+      }, 2000);
       return;
     }
     try {
       // panggil api get batas persil dari NOP
-      const response = await axios.get<ApiResponse<PersilData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataspersilbyNOP?nop=${nop.replace(/\./g, "")}`);
-      const fotoResponse = await axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/fotopersil/${nop.replace(/\./g, "")}`);
+      const response = await axios.get<ApiResponse<PersilData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataspersilbyNOP?nop=${nop.replace(/\./g, "")}`, {
+        withCredentials: true,
+      });
+      const fotoResponse = await axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/fotopersil/${nop.replace(/\./g, "")}`, {
+        withCredentials: true,
+      });
 
       const data = response.data.data;
       const NOP = `${data.KD_PROV}${data.KD_KAB}${data.KD_KEC}${data.KD_KEL}${data.KD_BLOK}${data.NO_URUT}${data.KD_JNS_OP}`;
@@ -101,7 +110,18 @@ const Navbar = ({ setSearchedPolygon, setSearchedNOPZoom, drawerOpen, setDrawerO
     <>
       <div className="p-4 -700  max-w-md mx-auto absolute top-4 left-4 z-[1000]">
         <div className="flex items-center space-x-2 border p-2 bg-white rounded-md">
-          <DrawerList />
+          <DrawerList
+            setSearchedPolygon={setSearchedPolygon}
+            setFotoPersil={setFotoPersil}
+            setGeomData={setGeomData}
+            setSearchedNOPZoom={setSearchedNOPZoom}
+            setSearchNop={setSearchNop}
+            setDrawerOpen={setDrawerOpen}
+            latitudeCP={latitudeCP}
+            setLatitudeCP={setLatitudeCP}
+            longitudeCP={longitudeCP}
+            setLongitudeCP={setLongitudeCP}
+          />
           <TextField fullWidth variant="standard" placeholder="Search NOP" value={nop} onChange={handleNopChange} error={!!error} helperText={error} />
           <IconButton onClick={handleSearch}>
             <SearchIcon />

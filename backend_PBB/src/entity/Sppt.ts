@@ -13,7 +13,7 @@ import { SpptOpBersama } from "./SpptOpBersama";
 @Index("e6_9_ak", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "pbbYgHarusDibayarSppt", "thnPajakSppt"], {})
 @Index("sppt_pkey", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "thnPajakSppt"], { unique: true })
 @Index("e6_1_ak", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "nmWpSppt", "noUrut", "thnPajakSppt"], {})
-@Entity("sppt", { schema: "public" })
+@Entity("sppt")
 export class Sppt {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

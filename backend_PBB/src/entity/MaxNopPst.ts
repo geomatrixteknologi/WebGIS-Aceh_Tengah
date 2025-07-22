@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("max_nop_pst_pkey", ["kdBlok", "kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi"], { unique: true })
-@Entity("max_nop_pst", { schema: "public" })
+@Entity("max_nop_pst")
 export class MaxNopPst {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

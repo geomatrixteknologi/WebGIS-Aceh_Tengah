@@ -4,7 +4,7 @@ import { Entity, Column, PrimaryColumn } from "typeorm";
 export class BatasBlok {
   @Column({
     type: "geometry",
-    spatialFeatureType: "Polygon",
+    spatialFeatureType: "MultiPolygon",
     srid: 4326,
     nullable: true,
   })

@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("range_penyusutan_pkey", ["kdRangePenyusutan"], { unique: true })
-@Entity("range_penyusutan", { schema: "public" })
+@Entity("range_penyusutan")
 export class RangePenyusutan {
   @Column("character", {
     primary: true,

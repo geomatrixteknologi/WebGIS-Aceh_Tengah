@@ -19,7 +19,7 @@ import { DatObjekPajak } from "./DatObjekPajak";
 @Index("d14_1_ak", ["kdBlok", "kdDati2", "kdJnsOp", "kdJpb", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noBng", "noUrut"], { unique: true })
 @Index("dat_op_bangunan_pkey", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noBng", "noUrut"], { unique: true })
 @Index("d14_3_ak", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noBng", "noFormulirLspop", "noUrut"], { unique: true })
-@Entity("dat_op_bangunan", { schema: "public" })
+@Entity("dat_op_bangunan")
 export class DatOpBangunan {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

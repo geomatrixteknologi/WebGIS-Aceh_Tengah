@@ -1,6 +1,6 @@
 import { Column, Entity } from "typeorm";
 
-@Entity("plan_table", { schema: "public" })
+@Entity("plan_table")
 export class PlanTable {
   @Column("character varying", {
     name: "statement_id",

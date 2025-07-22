@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("dat_sketnjop_pkey", ["bulan", "noUrut", "thnPajak"], { unique: true })
-@Entity("dat_sketnjop", { schema: "public" })
+@Entity("dat_sketnjop")
 export class DatSketnjop {
   @Column("bigint", { primary: true, name: "no_urut" })
   noUrut!: string;

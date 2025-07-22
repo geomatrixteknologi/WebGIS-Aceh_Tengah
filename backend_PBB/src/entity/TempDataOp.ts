@@ -11,7 +11,7 @@ import { Column, Entity, Index } from "typeorm";
   ["bundelPelayanan", "kdBlokPemohon", "kdDati2Pemohon", "kdJnsOpPemohon", "kdKantor", "kdKanwil", "kdKecamatanPemohon", "kdKelurahanPemohon", "kdPropinsiPemohon", "noUrutPelayanan", "noUrutPemohon", "tempJnsData", "thnPelayanan"],
   { unique: true }
 )
-@Entity("temp_data_op", { schema: "public" })
+@Entity("temp_data_op")
 export class TempDataOp {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

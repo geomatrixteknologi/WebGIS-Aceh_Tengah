@@ -3,7 +3,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("jabatan_komdir_fk", ["kdJabatanKomdir"], {})
 @Index("komdir_pkey", ["mfcabComp", "mfcabKokmdir", "mfkppComp", "mfkppKomdir", "mfnpwpComp", "mfnpwpKomdir"], { unique: true })
 @Index("comp_komdir_fk", ["mfcabComp", "mfkppComp", "mfnpwpComp"], {})
-@Entity("komdir", { schema: "public" })
+@Entity("komdir")
 export class Komdir {
   @Column("character", { primary: true, name: "mfnpwp_comp", length: 9 })
   mfnpwpComp!: string;

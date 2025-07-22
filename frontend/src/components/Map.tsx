@@ -12,14 +12,36 @@ import L from "leaflet";
 import { getPolygonCenter } from "@/utility/GetPolygonCenter";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 
-import { ApiResponse, GeomData, WarnaKelData } from "@/utility/Interfaces";
+import { ApiResponse, GeomData, logged, WarnaKelData } from "@/utility/Interfaces";
 import { defaultGeoJsonStyle, defaultGeoJsonStyleBlok, defaultGeoJsonStyleKelurahan } from "@/utility/GeoJSONStyles";
-import { Box } from "@mui/material";
+import { Backdrop, Box, CircularProgress } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolygon }: { onChangeTematik: any; selectedTematik: string; isZNT: boolean; setIsZNT: (value: boolean) => void; searchedPolygon: any; searchedNOP: any }) => {
+const Maps = ({
+  onChangeTematik,
+  selectedTematik,
+  isZNT,
+  setIsZNT,
+  searchedPolygon,
+  latitudeCP,
+  longitudeCP,
+  loading,
+  setLoading,
+}: {
+  onChangeTematik: any;
+  selectedTematik: string;
+  isZNT: boolean;
+  setIsZNT: (value: boolean) => void;
+  searchedPolygon: any;
+  searchedNOP: any;
+  latitudeCP: any;
+  longitudeCP: any;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<any>>;
+}) => {
   const [geoJsonDataKelurahan, setGeoJsonDataKelurahan] = useState<GeoJSON.FeatureCollection | null>(null);
   const [geoJsonDataBlok, setGeoJsonDataBlok] = useState<GeoJSON.FeatureCollection | null>(null);
   const [geoJsonDataPersil, setGeoJsonDataPersil] = useState<GeoJSON.FeatureCollection | null>(null);
@@ -38,15 +60,29 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
   });
   const [fotoPersil, setFotoPersil] = useState<string[] | null>(null);
   const [dataTitik, setDataTitik] = useState<any>([]);
-  // const [geoKelurahan, setGeoKelurahan] = useState<any>([]);
-  // const [geoBlok, setGeoBlok] = useState<any>([]);
-  // const [clusteredData, setClusteredData] = useState<any>({});
+  const router = useRouter();
+
+  useEffect(() => {
+    axios
+      .get<logged>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/auth/me`, { withCredentials: true })
+      .then((res) => {
+        if (res.status === 200) {
+          return;
+        } else {
+          router.push("/login");
+        }
+      })
+      .catch(() => router.push("/login"));
+  }, [router]);
 
   useEffect(() => {
     // Fetch data kelurahan dari API
     const fetchDataKel = async () => {
       try {
-        const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataskelurahan`);
+        setLoading(true);
+        const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataskelurahan`, {
+          withCredentials: true,
+        });
         setGeoJsonDataKelurahan({
           type: "FeatureCollection",
           features: response.data.data,
@@ -58,17 +94,22 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
         }
         console.error("Error fetching data:", error);
         return { code: 500, data: [], message: "Terjadi kesalahan" };
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchDataKel();
-  }, []);
+  }, [setLoading]);
 
   useEffect(() => {
     // Fetch data blok dari API
     const fetchDataBlok = async () => {
       try {
-        const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/batasblok`);
+        setLoading(true);
+        const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/batasblok`, {
+          withCredentials: true,
+        });
         setGeoJsonDataBlok({
           type: "FeatureCollection",
           features: response.data.data,
@@ -80,17 +121,22 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
         }
         console.error("Error fetching data:", error);
         return { code: 500, data: [], message: "Terjadi kesalahan" };
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchDataBlok();
-  }, []);
+  }, [setLoading]);
 
   useEffect(() => {
     // Fetch data persil dari API
     const fetchDataPersil = async () => {
       try {
-        const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataspersil`);
+        setLoading(true);
+        const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataspersil`, {
+          withCredentials: true,
+        });
         setGeoJsonDataPersil({
           type: "FeatureCollection",
           features: response.data.data,
@@ -102,17 +148,22 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
         }
         console.error("Error fetching data:", error);
         return { code: 500, data: [], message: "Terjadi kesalahan" };
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchDataPersil();
-  }, []);
+  }, [setLoading]);
 
   useEffect(() => {
     // Fetch data ZNT dari API
     const fetchDataZNT = async () => {
       try {
-        const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/batasznt`);
+        setLoading(true);
+        const response = await axios.get<ApiResponse<GeoJSON.Feature>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/batasznt`, {
+          withCredentials: true,
+        });
         setGeoJsonDataZNT({
           type: "FeatureCollection",
           features: response.data.data,
@@ -124,11 +175,13 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
         }
         console.error("Error fetching data:", error);
         return { code: 500, data: [], message: "Terjadi kesalahan" };
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchDataZNT();
-  }, []);
+  }, [setLoading]);
 
   // if onChangeTematik berubah dari parent state
   useEffect(() => {
@@ -144,7 +197,10 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
   useEffect(() => {
     const fetchWarnaKel = async () => {
       try {
-        const warnaKelResponse = await axios.get<ApiResponse<WarnaKelData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/refwarnakelurahan`);
+        setLoading(true);
+        const warnaKelResponse = await axios.get<ApiResponse<WarnaKelData>>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/refwarnakelurahan`, {
+          withCredentials: true,
+        });
         const warnaMap: Record<string, string> = {}; // Map ID to WARNA
         const newStylesPersil: Record<string, { color: string; weight: number; opacity: number; fillColor: string; fillOpacity: number }> = {};
         const newStylesKel: Record<string, { color: string; weight: number; opacity: number; fillColor: string; fillOpacity: number }> = {};
@@ -187,11 +243,13 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
         }
         console.error("Error fetching data:", error);
         return { code: 500, data: [], message: "Terjadi kesalahan" };
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchWarnaKel();
-  }, [geoJsonDataKelurahan]);
+  }, [geoJsonDataKelurahan, setLoading]);
 
   const onEachFeatureKel = (feature: any, layer: any) => {
     if (feature.properties && feature.properties.NM_KEL) {
@@ -217,15 +275,19 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
         setSearchNop("data tidak ditemukan");
       }
       try {
-        const fotoResponse = await axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/fotopersil/${NOP}`);
+        setLoading(true);
+        const fotoResponse = await axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/fotopersil/${NOP}`, {
+          withCredentials: true,
+        });
         setFotoPersil(fotoResponse.data.imageUrls);
       } catch (error: any) {
         toast.error(error.response?.data?.message || "NOP tidak Valid");
+      } finally {
+        setLoading(false);
+        setGeomData(feature.geometry);
+        setSearchNop(NOP);
+        setDrawerOpen(true);
       }
-
-      setGeomData(feature.geometry);
-      setSearchNop(NOP);
-      setDrawerOpen(true);
     });
   };
 
@@ -298,84 +360,31 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
     }
   }, [searchedPolygon]);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const [titikRes, kelRes, blokRes] = await Promise.all([
-  //         //
-  //         axios.get<any>("http://localhost:8100/api/get/gettitikpendataan"),
-  //         axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataskelurahan`),
-  //         axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/batasblok`),
-  //       ]);
-  //       setDataTitik(titikRes.data.data); // hasil array of titik pendataan
-  //       setGeoKelurahan(kelRes.data.data); // GeoJSON Feature[]
-  //       setGeoBlok(blokRes.data.data); // GeoJSON Feature[]
-  //     } catch (err) {
-  //       console.error("Gagal mengambil data:", err);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-  // useEffect(() => {
-  //   if (!dataTitik.length || !geoKelurahan.length || !geoBlok.length) return;
-
-  //   const result = {};
-
-  //   geoKelurahan.forEach((kel: any) => {
-  //     const kdKel = kel.properties.KD_KEL;
-  //     const kelKey = `${kel.properties.KD_PROV}${kel.properties.KD_KAB}${kel.properties.KD_KEC}${kdKel}`;
-  //     const kelPolygon = turf.polygon(kel.geometry.coordinates);
-
-  //     const titikDalamKel = dataTitik.filter((item: any) => {
-  //       const { geom } = item.datOpPajak;
-  //       const point = turf.point(geom.coordinates);
-  //       return turf.booleanPointInPolygon(point, kelPolygon);
-  //     });
-
-  //     const blokInKel = geoBlok.filter((blok: any) => blok.properties.KD_KEL === kel.properties.KD_KEL && blok.properties.KD_KEC === kel.properties.KD_KEC);
-
-  //     const blokResult = {};
-  //     blokInKel.forEach((blok: any) => {
-  //       const kdBlok = blok.properties.KD_BLOK;
-  //       const blokKey = `${blok.properties.KD_PROV}${blok.properties.KD_KAB}${blok.properties.KD_KEC}${blok.properties.KD_KEL}${kdBlok}`;
-  //       const blokPolygon = turf.polygon(blok.geometry.coordinates);
-
-  //       const titikDalamBlok = titikDalamKel.filter((item: any) => {
-  //         const { geom } = item.datOpPajak;
-  //         const point = turf.point(geom.coordinates);
-  //         return turf.booleanPointInPolygon(point, blokPolygon);
-  //       });
-
-  //       blokResult[blokKey] = {
-  //         geojson_blok: blok,
-  //         titik: titikDalamBlok,
-  //       };
-  //     });
-
-  //     result[kelKey] = {
-  //       nama_kel: kel.properties.NM_KEL,
-  //       geojson_kel: kel,
-  //       blok: blokResult,
-  //     };
-  //   });
-
-  //   setClusteredData(result);
-  // }, [dataTitik, geoKelurahan, geoBlok]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get<any>(`${process.env.NEXT_PUBLIC_PENDATAAN_API_URL}/api/get/gettitikpendataan`); // sesuaikan endpoint
+        setLoading(true);
+        const res = await axios.get<any>(`${process.env.NEXT_PUBLIC_PENDATAAN_API_URL}/api/get/gettitikpendataan`, {
+          withCredentials: true,
+        }); // sesuaikan endpoint
         setDataTitik(res.data.data);
       } catch (err) {
         console.error("Gagal mengambil data titik pendataan:", err);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [setLoading]);
+
+  if (latitudeCP === 0 || longitudeCP === 0) {
+    return (
+      <Backdrop open sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    );
+  }
 
   return (
     <>
@@ -403,7 +412,7 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
         {/* dropdown basemap icon */}
         <IconLayerControl selectedLayer={selectedLayerBasemap} setSelectedLayer={setSelectedLayerBasemap} layerType={"Basemap"} />
 
-        {/* dropdown basemap icon */}
+        {/* dropdown titik pendataan icon */}
         <IconLayerControl selectedLayer={selectedLayerTtik} setSelectedLayer={setSelectedLayerTitik} layerType={"Titik"} />
 
         {/* dropdown batas icon */}
@@ -423,7 +432,7 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
           style={{
             height: "100vh",
           }}
-          center={[-0.637, 114.571]}
+          center={[latitudeCP, longitudeCP]}
           zoom={13}
           scrollWheelZoom={true}
           zoomControl={false}
@@ -509,44 +518,6 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
             />
           )}
 
-          {/* {Object.entries(clusteredData).map(([kelKey, kelValue]) =>
-            Object.entries(kelValue.blok).map(([blokKey, blokValue]) =>
-              blokValue.titik.map((item: any, index: number) => {
-                const { datOpPajak, wajibPajak, datOpBangunan } = item;
-                const [lng, lat] = datOpPajak.geom.coordinates;
-
-                return (
-                  <CircleMarker
-                    key={`${blokKey}-${index}`}
-                    center={[lat, lng]}
-                    radius={6}
-                    pathOptions={{
-                      color: datOpPajak.kd_jns_pelayanan === "11" ? "#000" : datOpPajak.kd_jns_pelayanan === "12" ? "#000" : datOpPajak.kd_jns_pelayanan === "13" ? "#000" : "gray",
-                      fillColor: datOpPajak.kd_jns_pelayanan === "11" ? "#1af513" : datOpPajak.kd_jns_pelayanan === "12" ? "#f2f513" : datOpPajak.kd_jns_pelayanan === "13" ? "#ff2525" : "gray",
-                      fillOpacity: 0.7,
-                    }}
-                  >
-                    <Popup>
-                      <strong>NOP:</strong> {datOpPajak.nop_join}
-                      <br />
-                      <strong>Nama WP:</strong> {wajibPajak?.nm_wp || "-"}
-                      <br />
-                      <strong>Jalan:</strong> {datOpPajak.jalan_op}
-                      <br />
-                      <strong>Luas Bumi:</strong> {datOpPajak.total_luas_bumi} m²
-                      <br />
-                      <strong>Luas Bangunan:</strong> {datOpPajak.total_luas_bng} m²
-                      <br />
-                      <strong>Jumlah Bangunan:</strong> {datOpBangunan.length}
-                      <br />
-                      <strong>Kode Pelayanan:</strong> {datOpPajak.kd_jns_pelayanan}
-                    </Popup>
-                  </CircleMarker>
-                );
-              })
-            )
-          )} */}
-
           {selectedLayerTtik.includes("Titik Pendataan") && (
             <MarkerClusterGroup
               chunkedLoading
@@ -576,9 +547,6 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
                   }}
                   pane="titik-pendataan"
                 >
-                  {/* <Tooltip direction="top" offset={[0, -10]} opacity={1} permanent>
-                  <span>{item.datOpPajak.nop}</span>
-                </Tooltip> */}
                   <Popup pane="popup">
                     {item.datOpPajak.foto_op && item.datOpPajak.foto_op.length !== 0 ? (
                       <Box sx={{ width: "100%", maxHeight: 250, position: "relative", borderRadius: 2, overflow: "hidden" }}>
@@ -628,6 +596,9 @@ const Maps = ({ onChangeTematik, selectedTematik, isZNT, setIsZNT, searchedPolyg
 
           <ZoomControl position="bottomright" />
         </MapContainer>
+        <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={loading}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
       </div>
     </>
   );

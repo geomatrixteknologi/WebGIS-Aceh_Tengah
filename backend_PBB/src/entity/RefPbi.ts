@@ -2,7 +2,7 @@ import { Column, Entity, Index } from "typeorm";
 
 @Index("ref_pbi_pkey", ["kdPbi", "kdPebin"], { unique: true })
 @Index("ref_pebin_pbi_fk", ["kdPebin"], {})
-@Entity("ref_pbi", { schema: "public" })
+@Entity("ref_pbi")
 export class RefPbi {
   @Column("character", { primary: true, name: "kd_pebin", length: 2 })
   kdPebin!: string;

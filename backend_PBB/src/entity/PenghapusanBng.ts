@@ -3,7 +3,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("penghapusan_bng_pkey", ["indeksPenghapusanBng", "kdBlokPenghapusanBng", "kdDati2", "kdJnsOpPenghapusanBng", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noBngPenghapusan", "noUrutPenghapusanBng"], { unique: true })
 @Index("x9_1_ak", ["indeksPenghapusanBng", "kdBlokPenghapusanBng", "kdDati2", "kdJnsOpPenghapusanBng", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noBngPenghapusan", "noUrutPenghapusanBng", "thnPajakPenghapusanBng"], { unique: true })
 @Index("x9_2_ak", ["kdBlokPenghapusanBng", "kdDati2", "kdJnsOpPenghapusanBng", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noBngPenghapusan", "noFormulirPenghapusanBng", "noUrutPenghapusanBng"], { unique: true })
-@Entity("penghapusan_bng", { schema: "public" })
+@Entity("penghapusan_bng")
 export class PenghapusanBng {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

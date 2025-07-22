@@ -24,7 +24,7 @@ import { RefKecamatan } from "./RefKecamatan";
 
 @Index("ref_dati2_pkey", ["kdDati2", "kdPropinsi"], { unique: true })
 @Index("a2_1_ak", ["kdDati2", "kdPropinsi", "nmDati2"], { unique: true })
-@Entity("ref_dati2", { schema: "public" })
+@Entity("ref_dati2")
 export class RefDati2 {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

@@ -20,7 +20,7 @@ import { Column, Entity, Index } from "typeorm";
   ],
   { unique: true }
 )
-@Entity("rincian_pembetulan_spptskpstp", { schema: "public" })
+@Entity("rincian_pembetulan_spptskpstp")
 export class RincianPembetulanSpptskpstp {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

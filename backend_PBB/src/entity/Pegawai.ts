@@ -14,7 +14,7 @@ import { TtrSkp } from "./TtrSkp";
 import { TtrStp } from "./TtrStp";
 
 @Index("pegawai_pkey", ["nip"], { unique: true })
-@Entity("pegawai", { schema: "public" })
+@Entity("pegawai")
 export class Pegawai {
   @Column("character", { primary: true, name: "nip", length: 18 })
   nip!: string;

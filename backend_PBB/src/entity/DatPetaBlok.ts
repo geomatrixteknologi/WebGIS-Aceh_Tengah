@@ -5,7 +5,7 @@ import { DatPetaZnt } from "./DatPetaZnt";
 
 @Index("d4_1_ak", ["kdBlok", "kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi", "statusPetaBlok"], { unique: true })
 @Index("dat_peta_blok_pkey", ["kdBlok", "kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi"], { unique: true })
-@Entity("dat_peta_blok", { schema: "public" })
+@Entity("dat_peta_blok")
 export class DatPetaBlok {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

@@ -1,6 +1,6 @@
 import { Column, Entity } from "typeorm";
 
-@Entity("parameter_sppt_stts_dhkp", { schema: "public" })
+@Entity("parameter_sppt_stts_dhkp")
 export class ParameterSpptSttsDhkp {
   @Column("smallint", { name: "sppt_terpisah" })
   spptTerpisah!: number;

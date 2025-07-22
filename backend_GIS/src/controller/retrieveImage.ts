@@ -1,39 +1,6 @@
 import { Request, Response } from "express";
-import { AppDataSource } from "../data-resource";
 import { HeadObjectCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
 import s3 from "../utils/s3";
-
-// export const GetFotoPersil = async (req: Request, res: Response) => {
-//   try {
-//     const { nop } = req.params;
-
-//     const persilRepo = AppDataSource.getRepository(BatasPersil);
-//     const batasPersil = await persilRepo.findOne({
-//       where: {
-//         KD_PROV: nop.substring(0, 2),
-//         KD_KAB: nop.substring(2, 4),
-//         KD_KEC: nop.substring(4, 7),
-//         KD_KEL: nop.substring(7, 10),
-//         KD_BLOK: nop.substring(10, 13),
-//         NO_URUT: nop.substring(13, 17),
-//         KD_JNS_OP: nop.substring(17, 18),
-//       },
-//     });
-
-//     if (!batasPersil || !batasPersil.FOTO_PERSIL) {
-//       return res.status(404).json({ message: "No image found for this NOP" });
-//     }
-
-//     return res.status(200).json({
-//       code: 200,
-//       imageUrl: batasPersil.FOTO_PERSIL,
-//       messagge: "foto ditemukan",
-//     });
-//   } catch (error) {
-//     console.error("Error fetching image:", error);
-//     return res.status(500).json({ message: "Internal server error" });
-//   }
-// };
 
 export const checkfotopersil = async (req: Request, res: Response) => {
   const { filename } = req.params;

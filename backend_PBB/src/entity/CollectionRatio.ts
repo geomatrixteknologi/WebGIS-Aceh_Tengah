@@ -4,7 +4,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("p28_1_ak", ["kdDati2", "kdPropinsi", "kdSektor", "thnPajakCr"], {
   unique: true,
 })
-@Entity("collection_ratio", { schema: "public" })
+@Entity("collection_ratio")
 export class CollectionRatio {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

@@ -1,6 +1,6 @@
 import { Column, Entity } from "typeorm";
 
-@Entity("z_sppt_bayar_kolektif", { schema: "public" })
+@Entity("z_sppt_bayar_kolektif")
 export class ZSpptBayarKolektif {
   @Column("character", { name: "kd_propinsi", nullable: true, length: 2 })
   kdPropinsi!: string | null;

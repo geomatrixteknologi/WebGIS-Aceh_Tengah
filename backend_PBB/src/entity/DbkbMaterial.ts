@@ -4,7 +4,7 @@ import { RefDati2 } from "./RefDati2";
 @Index("dbkb_material_pkey", ["kdDati2", "kdKegiatan", "kdPekerjaan", "kdPropinsi", "thnDbkbMaterial"], { unique: true })
 @Index("c12_1_ak", ["kdDati2", "kdKegiatan", "kdPekerjaan", "kdPropinsi", "thnDbkbMaterial"], { unique: true })
 @Index("c12_2_ak", ["kdDati2", "kdKegiatan", "kdPekerjaan", "kdPropinsi", "thnDbkbMaterial"], { unique: true })
-@Entity("dbkb_material", { schema: "public" })
+@Entity("dbkb_material")
 export class DbkbMaterial {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

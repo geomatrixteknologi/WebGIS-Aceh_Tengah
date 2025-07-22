@@ -3,7 +3,7 @@ import { Skp } from "./Skp";
 import { Pegawai } from "./Pegawai";
 
 @Index("ttr_skp_pkey", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "tglTerbitSkp", "thnPajakSkp"], { unique: true })
-@Entity("ttr_skp", { schema: "public" })
+@Entity("ttr_skp")
 export class TtrSkp {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

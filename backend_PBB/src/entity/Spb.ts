@@ -6,7 +6,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("spb_pkey", ["bundelPelayanan", "kdBlokPemohon", "kdDati2Pemohon", "kdJnsOpPemohon", "kdKantor", "kdKanwil", "kdKecamatanPemohon", "kdKelurahanPemohon", "kdPropinsiPemohon", "noUrutPelayanan", "noUrutPemohon", "thnPelayanan"], {
   unique: true,
 })
-@Entity("spb", { schema: "public" })
+@Entity("spb")
 export class Spb {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

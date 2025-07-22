@@ -4,7 +4,7 @@ import { SkpOpBersama } from "./SkpOpBersama";
 import { Sppt } from "./Sppt";
 
 @Index("kelas_tanah_pkey", ["kdKlsTanah", "thnAwalKlsTanah"], { unique: true })
-@Entity("kelas_tanah", { schema: "public" })
+@Entity("kelas_tanah")
 export class KelasTanah {
   @Column("character", { primary: true, name: "kd_kls_tanah", length: 3 })
   kdKlsTanah!: string;

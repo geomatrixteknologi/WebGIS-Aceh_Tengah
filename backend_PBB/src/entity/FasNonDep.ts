@@ -12,7 +12,7 @@ import { RefDati2 } from "./RefDati2";
 @Index("c24_1_ak", ["kdDati2", "kdFasilitas", "kdPropinsi", "thnNonDep"], {
   unique: true,
 })
-@Entity("fas_non_dep", { schema: "public" })
+@Entity("fas_non_dep")
 export class FasNonDep {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

@@ -3,7 +3,7 @@ import { Column, Entity, Index } from "typeorm";
 @Index("l2_2_ak", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi", "statusLogZnt"], { unique: true })
 @Index("l2_1_ak", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi", "nipPerekamLogZnt"], { unique: true })
 @Index("log_znt_pkey", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi"], { unique: true })
-@Entity("log_znt", { schema: "public" })
+@Entity("log_znt")
 export class LogZnt {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

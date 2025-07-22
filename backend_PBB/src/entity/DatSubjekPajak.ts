@@ -6,7 +6,7 @@ import { DatObjekPajak } from "./DatObjekPajak";
 @Index("d11_4_ak", ["npwp", "subjekPajakId"], { unique: true })
 @Index("d11_3_ak", ["statusPekerjaanWp", "subjekPajakId"], { unique: true })
 @Index("dat_subjek_pajak_pkey", ["subjekPajakId"], { unique: true })
-@Entity("dat_subjek_pajak", { schema: "public" })
+@Entity("dat_subjek_pajak")
 export class DatSubjekPajak {
   @Column("character varying", {
     name: "blok_kav_no_wp",

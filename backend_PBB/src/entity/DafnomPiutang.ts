@@ -3,7 +3,7 @@ import { DafnomOp } from "./DafnomOp";
 import { Pegawai } from "./Pegawai";
 
 @Index("dafnom_piutang_pkey", ["kdBlok", "kdDati2", "kdJnsOp", "kdKecamatan", "kdKelurahan", "kdPropinsi", "noUrut", "thnPajakSppt", "thnPembentukan"], { unique: true })
-@Entity("dafnom_piutang", { schema: "public" })
+@Entity("dafnom_piutang")
 export class DafnomPiutang {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

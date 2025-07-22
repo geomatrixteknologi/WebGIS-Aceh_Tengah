@@ -1,7 +1,7 @@
 import { Column, Entity, Index } from "typeorm";
 
 @Index("dafnom_gelondongan_pkey", ["kdDati2", "kdKecamatan", "kdKelurahan", "kdPropinsi", "thnPembentukan"], { unique: true })
-@Entity("dafnom_gelondongan", { schema: "public" })
+@Entity("dafnom_gelondongan")
 export class DafnomGelondongan {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

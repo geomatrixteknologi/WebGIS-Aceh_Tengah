@@ -1,13 +1,16 @@
 import { Response, NextFunction, Request } from "express";
 import jwt from "jsonwebtoken";
 import { AuthenticatedRequest } from "@/types/express";
+import dotenv from "dotenv";
 
-const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key";
+dotenv.config();
+
+const JWT_SECRET = process.env.JWT_SECRET as string;
 
 // Middleware untuk autentikasi pengguna
 export const authenticateUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const token = req.cookies["user-cookies"]; // Ambil token dari cookie
+    const token = await req.cookies["user-cookies"]; // Ambil token dari cookie
 
     if (!token) {
       return res.status(403).json({

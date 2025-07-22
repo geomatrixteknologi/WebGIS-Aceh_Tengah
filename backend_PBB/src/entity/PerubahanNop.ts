@@ -6,7 +6,7 @@ import { Column, Entity, Index } from "typeorm";
   ["kdBlok", "kdBlokAsal", "kdDati2", "kdDati2Asal", "kdJnsOp", "kdJnsOpAsal", "kdKecamatan", "kdKecamatanAsal", "kdKelurahan", "kdKelurahanAsal", "kdPropinsi", "kdPropinsiAsal", "noUrut", "noUrutAsal", "statusPerubahanNop"],
   {}
 )
-@Entity("perubahan_nop", { schema: "public" })
+@Entity("perubahan_nop")
 export class PerubahanNop {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

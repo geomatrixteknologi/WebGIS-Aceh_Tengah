@@ -1,6 +1,6 @@
 import { Column, Entity } from "typeorm";
 
-@Entity("z_input_sppt_tersampaikan", { schema: "public" })
+@Entity("z_input_sppt_tersampaikan")
 export class ZInputSpptTersampaikan {
   @Column("character", { name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;

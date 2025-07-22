@@ -20,13 +20,13 @@ const DrawerListItem = ({ title, useIcon, identifier }: any) => {
     const fetchOptions = async () => {
       try {
         // Fetch data kecamatan dari backend
-        const response1 = await axios.get<ApiResponse<Kecamatan>>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/kodekecamatan`);
+        const response1 = await axios.get<ApiResponse<Kecamatan>>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/kodekecamatan`, { withCredentials: true });
         const kecamatanData = response1.data.data.map((item) => `${item.kdKecamatan} - ${item.nmKecamatan}`);
 
         setOptions1(kecamatanData);
 
         // Fetch data kelurahan dari backend
-        const response2 = await axios.get<ApiResponse<Kelurahan>>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/kodekelurahan`);
+        const response2 = await axios.get<ApiResponse<Kelurahan>>(`${process.env.NEXT_PUBLIC_PBB_API_URL}/api/retrieve/kodekelurahan`, { withCredentials: true });
         const kelurahanData = response2.data.data;
 
         setOptions2(kelurahanData);

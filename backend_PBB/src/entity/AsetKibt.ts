@@ -4,7 +4,7 @@ import { Column, Entity, Index } from "typeorm";
   unique: true,
 })
 @Index("kibt_ref_upb_fk", ["kdPbi", "kdPebin", "kdPpbi", "kdUpb"], {})
-@Entity("aset_kibt", { schema: "public" })
+@Entity("aset_kibt")
 export class AsetKibt {
   @Column("character", { primary: true, name: "kd_pebin", length: 2 })
   kdPebin!: string;

@@ -4,7 +4,7 @@ import { Column, Entity, Index } from "typeorm";
   unique: true,
 })
 @Index("spmkp_pkey", ["kdKantor", "kdKanwil", "noSpmkp"], { unique: true })
-@Entity("spmkp", { schema: "public" })
+@Entity("spmkp")
 export class Spmkp {
   @Column("character", { primary: true, name: "kd_kanwil", length: 2 })
   kdKanwil!: string;

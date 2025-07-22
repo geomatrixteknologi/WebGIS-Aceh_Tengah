@@ -5,7 +5,7 @@ import { RefDati2 } from "./RefDati2";
 @Index("dbkb_jpb14_pkey", ["kdDati2", "kdPropinsi", "thnDbkbJpb14"], {
   unique: true,
 })
-@Entity("dbkb_jpb14", { schema: "public" })
+@Entity("dbkb_jpb14")
 export class DbkbJpb14 {
   @Column("character", { primary: true, name: "kd_propinsi", length: 2 })
   kdPropinsi!: string;
