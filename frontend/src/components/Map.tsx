@@ -62,10 +62,6 @@ const Maps = ({
   const [dataTitik, setDataTitik] = useState<any>([]);
   const router = useRouter();
 
-  // const [geoKelurahan, setGeoKelurahan] = useState<any>([]);
-  // const [geoBlok, setGeoBlok] = useState<any>([]);
-  // const [clusteredData, setClusteredData] = useState<any>({});
-
   useEffect(() => {
     axios
       .get<logged>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/auth/me`, { withCredentials: true })
@@ -364,72 +360,6 @@ const Maps = ({
     }
   }, [searchedPolygon]);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const [titikRes, kelRes, blokRes] = await Promise.all([
-  //         //
-  //         axios.get<any>("http://localhost:8100/api/get/gettitikpendataan"),
-  //         axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/bataskelurahan`),
-  //         axios.get<any>(`${process.env.NEXT_PUBLIC_GIS_API_URL}/api/retrieve/batasblok`),
-  //       ]);
-  //       setDataTitik(titikRes.data.data); // hasil array of titik pendataan
-  //       setGeoKelurahan(kelRes.data.data); // GeoJSON Feature[]
-  //       setGeoBlok(blokRes.data.data); // GeoJSON Feature[]
-  //     } catch (err) {
-  //       console.error("Gagal mengambil data:", err);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-  // useEffect(() => {
-  //   if (!dataTitik.length || !geoKelurahan.length || !geoBlok.length) return;
-
-  //   const result = {};
-
-  //   geoKelurahan.forEach((kel: any) => {
-  //     const kdKel = kel.properties.KD_KEL;
-  //     const kelKey = `${kel.properties.KD_PROV}${kel.properties.KD_KAB}${kel.properties.KD_KEC}${kdKel}`;
-  //     const kelPolygon = turf.polygon(kel.geometry.coordinates);
-
-  //     const titikDalamKel = dataTitik.filter((item: any) => {
-  //       const { geom } = item.datOpPajak;
-  //       const point = turf.point(geom.coordinates);
-  //       return turf.booleanPointInPolygon(point, kelPolygon);
-  //     });
-
-  //     const blokInKel = geoBlok.filter((blok: any) => blok.properties.KD_KEL === kel.properties.KD_KEL && blok.properties.KD_KEC === kel.properties.KD_KEC);
-
-  //     const blokResult = {};
-  //     blokInKel.forEach((blok: any) => {
-  //       const kdBlok = blok.properties.KD_BLOK;
-  //       const blokKey = `${blok.properties.KD_PROV}${blok.properties.KD_KAB}${blok.properties.KD_KEC}${blok.properties.KD_KEL}${kdBlok}`;
-  //       const blokPolygon = turf.polygon(blok.geometry.coordinates);
-
-  //       const titikDalamBlok = titikDalamKel.filter((item: any) => {
-  //         const { geom } = item.datOpPajak;
-  //         const point = turf.point(geom.coordinates);
-  //         return turf.booleanPointInPolygon(point, blokPolygon);
-  //       });
-
-  //       blokResult[blokKey] = {
-  //         geojson_blok: blok,
-  //         titik: titikDalamBlok,
-  //       };
-  //     });
-
-  //     result[kelKey] = {
-  //       nama_kel: kel.properties.NM_KEL,
-  //       geojson_kel: kel,
-  //       blok: blokResult,
-  //     };
-  //   });
-
-  //   setClusteredData(result);
-  // }, [dataTitik, geoKelurahan, geoBlok]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -588,44 +518,6 @@ const Maps = ({
             />
           )}
 
-          {/* {Object.entries(clusteredData).map(([kelKey, kelValue]) =>
-            Object.entries(kelValue.blok).map(([blokKey, blokValue]) =>
-              blokValue.titik.map((item: any, index: number) => {
-                const { datOpPajak, wajibPajak, datOpBangunan } = item;
-                const [lng, lat] = datOpPajak.geom.coordinates;
-
-                return (
-                  <CircleMarker
-                    key={`${blokKey}-${index}`}
-                    center={[lat, lng]}
-                    radius={6}
-                    pathOptions={{
-                      color: datOpPajak.kd_jns_pelayanan === "11" ? "#000" : datOpPajak.kd_jns_pelayanan === "12" ? "#000" : datOpPajak.kd_jns_pelayanan === "13" ? "#000" : "gray",
-                      fillColor: datOpPajak.kd_jns_pelayanan === "11" ? "#1af513" : datOpPajak.kd_jns_pelayanan === "12" ? "#f2f513" : datOpPajak.kd_jns_pelayanan === "13" ? "#ff2525" : "gray",
-                      fillOpacity: 0.7,
-                    }}
-                  >
-                    <Popup>
-                      <strong>NOP:</strong> {datOpPajak.nop_join}
-                      <br />
-                      <strong>Nama WP:</strong> {wajibPajak?.nm_wp || "-"}
-                      <br />
-                      <strong>Jalan:</strong> {datOpPajak.jalan_op}
-                      <br />
-                      <strong>Luas Bumi:</strong> {datOpPajak.total_luas_bumi} m²
-                      <br />
-                      <strong>Luas Bangunan:</strong> {datOpPajak.total_luas_bng} m²
-                      <br />
-                      <strong>Jumlah Bangunan:</strong> {datOpBangunan.length}
-                      <br />
-                      <strong>Kode Pelayanan:</strong> {datOpPajak.kd_jns_pelayanan}
-                    </Popup>
-                  </CircleMarker>
-                );
-              })
-            )
-          )} */}
-
           {selectedLayerTtik.includes("Titik Pendataan") && (
             <MarkerClusterGroup
               chunkedLoading
@@ -655,9 +547,6 @@ const Maps = ({
                   }}
                   pane="titik-pendataan"
                 >
-                  {/* <Tooltip direction="top" offset={[0, -10]} opacity={1} permanent>
-                  <span>{item.datOpPajak.nop}</span>
-                </Tooltip> */}
                   <Popup pane="popup">
                     {item.datOpPajak.foto_op && item.datOpPajak.foto_op.length !== 0 ? (
                       <Box sx={{ width: "100%", maxHeight: 250, position: "relative", borderRadius: 2, overflow: "hidden" }}>
