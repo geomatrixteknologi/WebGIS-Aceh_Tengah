@@ -136,8 +136,9 @@ export default function LoginPage() {
           }}
         />
       </Box>
-      <Box position="absolute" top={28} left={100} zIndex={2}>
-        <Typography sx={{ color: "#FFF ", fontSize: "xx-large" }}>Geotax.org</Typography>
+      <Box position="absolute" top={16} left={100} zIndex={2}>
+        <Typography sx={{ color: "#FFF ", fontSize: "xx-large", letterSpacing: "20px", fontStyle: "italic", fontWeight: "Bold" }}>GEOTAX</Typography>
+        <Typography sx={{ color: "#FFF ", fontSize: "large", wordSpacing: "0px", letterSpacing: "4px" }}>Aplikasi Smart GIS</Typography>
       </Box>
       {/* logo client */}
       <Box position="absolute" top={13} right={0} zIndex={2}>
@@ -154,8 +155,8 @@ export default function LoginPage() {
         />
       </Box>
       <Box position="absolute" top={28} right={100} zIndex={2}>
-        <Typography sx={{ color: "#FFF ", fontSize: "large", textAlign: "right" }}>BADAN PENGELOLAAN KEUANGAN</Typography>
-        <Typography sx={{ color: "#FFF ", fontSize: "large", textAlign: "right" }}>KABUPATEN ACEH TENGAH</Typography>
+        <Typography sx={{ color: "#FFF ", fontSize: "large", textAlign: "right" }}>BADAN PENDAPATAN DAERAH</Typography>
+        <Typography sx={{ color: "#FFF ", fontSize: "large", textAlign: "right" }}>KABUPATEN MURUNG RAYA</Typography>
       </Box>
       <Toaster position="top-center" />
       <Box
