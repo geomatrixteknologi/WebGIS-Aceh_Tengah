@@ -3,7 +3,7 @@ import SatelliteIcon from "@mui/icons-material/Satellite";
 import RectangleRoundedIcon from "@mui/icons-material/RectangleRounded";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import MapIcon from "@mui/icons-material/Map";
-import { Box, IconButton, List, ListItemButton, ListItemText, Popover } from "@mui/material";
+import { Box, IconButton, List, ListItemButton, ListItemText, Popover, Tooltip } from "@mui/material";
 import React, { JSX, useState } from "react";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 
@@ -88,20 +88,22 @@ const IconLayerControl = ({ setSelectedLayer, selectedLayer, layerType, toggleZN
       }}
     >
       {/* Tombol untuk membuka Layer Control */}
-      <IconButton
-        onClick={handleClick}
-        sx={{
-          bgcolor: "#FFC107",
-          color: "black",
-          borderRadius: "50%",
-          width: 48,
-          height: 48,
-          boxShadow: 3,
-          "&:hover": { bgcolor: "#FFB300" },
-        }}
-      >
-        {layerType === "Basemap" ? <Public /> : layerType === "Titik" ? <RadioButtonCheckedIcon /> : <Terrain />}
-      </IconButton>
+      <Tooltip title={layerType} arrow>
+        <IconButton
+          onClick={handleClick}
+          sx={{
+            bgcolor: "#FFC107",
+            color: "black",
+            borderRadius: "50%",
+            width: 48,
+            height: 48,
+            boxShadow: 3,
+            "&:hover": { bgcolor: "#FFB300" },
+          }}
+        >
+          {layerType === "Basemap" ? <Public /> : layerType === "Titik" ? <RadioButtonCheckedIcon /> : <Terrain />}
+        </IconButton>
+      </Tooltip>
 
       {/* Popover untuk daftar layer */}
       <Popover

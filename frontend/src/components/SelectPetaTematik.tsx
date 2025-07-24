@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Box, IconButton, List, ListItemButton, ListItemText, Popover } from "@mui/material";
+import { Box, IconButton, List, ListItemButton, ListItemText, Popover, Tooltip } from "@mui/material";
 import { useState } from "react";
 import ModalStatusOP from "./ModalStatusOP";
 import axios from "axios";
@@ -252,20 +252,22 @@ const SelectPetaTematik: React.FC<SelectPetaTematikProps> = ({ selectedTematik, 
         zIndex: 999,
       }}
     >
-      <IconButton
-        onClick={handleClick}
-        sx={{
-          bgcolor: "#FFC107",
-          color: "black",
-          borderRadius: "50%",
-          width: 48,
-          height: 48,
-          boxShadow: 3,
-          "&:hover": { bgcolor: "#FFB300" },
-        }}
-      >
-        <AttachMoneyIcon />
-      </IconButton>
+      <Tooltip title={"Tematik"} arrow>
+        <IconButton
+          onClick={handleClick}
+          sx={{
+            bgcolor: "#FFC107",
+            color: "black",
+            borderRadius: "50%",
+            width: 48,
+            height: 48,
+            boxShadow: 3,
+            "&:hover": { bgcolor: "#FFB300" },
+          }}
+        >
+          <AttachMoneyIcon />
+        </IconButton>
+      </Tooltip>
       <Popover
         open={open}
         anchorEl={anchorEl}
