@@ -81,6 +81,7 @@ import { Box, Typography, TextField, Button, InputAdornment, IconButton, useMedi
 import { useTheme } from "@mui/material/styles";
 import { Visibility, VisibilityOff, PersonOutline, LockOutlined } from "@mui/icons-material";
 import Image from "next/image";
+import CopyrightIcon from "@mui/icons-material/Copyright";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -257,13 +258,12 @@ export default function LoginPage() {
             </Button>
 
             {/* Sign up text */}
-            <Typography fontSize={14} textAlign="center" mt={2}>
-              Don’t have account?{" "}
-              <Box component="span" fontWeight="bold" color="primary.main" sx={{ cursor: "pointer" }}>
-                Sign up
-              </Box>
-            </Typography>
           </form>
+        </Box>
+        <Box display="flex" justifyContent="center" alignItems="center" gap={5}>
+          <Typography fontSize={14} mt={2} sx={{ color: "#FFF" }}>
+            <CopyrightIcon /> 2025. PT Geomatrix Teknologi Indonesia
+          </Typography>
         </Box>
       </Box>
     </Box>
