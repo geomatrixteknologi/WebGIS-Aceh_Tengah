@@ -143,7 +143,7 @@ export default function LoginPage() {
       {/* logo client */}
       <Box position="absolute" top={13} right={0} zIndex={2}>
         <Image
-          src="/murung raya logo.png" // Ganti dengan logo Anda
+          src="/aceh_tengah.png" // Ganti dengan logo Anda
           alt="Logo"
           width={120}
           height={120}
@@ -154,9 +154,9 @@ export default function LoginPage() {
           }}
         />
       </Box>
-      <Box position="absolute" top={28} right={100} zIndex={2}>
-        <Typography sx={{ color: "#FFF ", fontSize: "large", textAlign: "right" }}>BADAN PENDAPATAN DAERAH</Typography>
-        <Typography sx={{ color: "#FFF ", fontSize: "large", textAlign: "right" }}>KABUPATEN MURUNG RAYA</Typography>
+      <Box position="absolute" top={28} right={110} zIndex={2}>
+        <Typography sx={{ color: "#FFF ", fontSize: "large", textAlign: "right" }}>BADAN PENGELOLAAN KEUANGAN</Typography>
+        <Typography sx={{ color: "#FFF ", fontSize: "large", textAlign: "right" }}>KABUPATEN ACEH TENGAH</Typography>
       </Box>
       <Toaster position="top-center" />
       <Box
@@ -167,12 +167,9 @@ export default function LoginPage() {
         sx={{ p: 4, borderRadius: 4, backgroundColor: "rgba(255, 255, 255, 0.1)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", boxShadow: "0 8px 32px rgba(0, 0, 0, 0.25)", border: "1px solid rgba(255, 255, 255, 0.3)" }}
       >
         {/* Header section */}
-        <Box textAlign="center" py={4} sx={{ color: "#fff" }}>
+        <Box textAlign="center" py={3} sx={{ color: "#fff" }}>
           <Typography variant="h5" fontWeight="bold" zIndex={1} position="relative">
             Login
-          </Typography>
-          <Typography variant="body2" zIndex={1} position="relative">
-            Please Sign in to Continue
           </Typography>
         </Box>
 
